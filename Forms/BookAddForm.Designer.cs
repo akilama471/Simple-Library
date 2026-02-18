@@ -1,0 +1,309 @@
+﻿namespace SarasaviLibrary.Forms
+{
+    partial class BookAddForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialSingleLineTextField2 = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialCheckBox1 = new MaterialSkin.Controls.MaterialCheckBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialSingleLineTextField3 = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(13, 153);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(228, 21);
+            this.comboBox1.TabIndex = 21;
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel4.Location = new System.Drawing.Point(12, 129);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(62, 19);
+            this.materialLabel4.TabIndex = 20;
+            this.materialLabel4.Text = "Author :";
+            // 
+            // materialSingleLineTextField2
+            // 
+            this.materialSingleLineTextField2.Depth = 0;
+            this.materialSingleLineTextField2.Hint = "";
+            this.materialSingleLineTextField2.Location = new System.Drawing.Point(11, 93);
+            this.materialSingleLineTextField2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialSingleLineTextField2.Name = "materialSingleLineTextField2";
+            this.materialSingleLineTextField2.PasswordChar = '\0';
+            this.materialSingleLineTextField2.SelectedText = "";
+            this.materialSingleLineTextField2.SelectionLength = 0;
+            this.materialSingleLineTextField2.SelectionStart = 0;
+            this.materialSingleLineTextField2.Size = new System.Drawing.Size(498, 23);
+            this.materialSingleLineTextField2.TabIndex = 17;
+            this.materialSingleLineTextField2.UseSystemPasswordChar = false;
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel2.Location = new System.Drawing.Point(7, 71);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(47, 19);
+            this.materialLabel2.TabIndex = 16;
+            this.materialLabel2.Text = "Title :";
+            // 
+            // materialSingleLineTextField1
+            // 
+            this.materialSingleLineTextField1.Depth = 0;
+            this.materialSingleLineTextField1.Hint = "";
+            this.materialSingleLineTextField1.Location = new System.Drawing.Point(11, 30);
+            this.materialSingleLineTextField1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialSingleLineTextField1.Name = "materialSingleLineTextField1";
+            this.materialSingleLineTextField1.PasswordChar = '\0';
+            this.materialSingleLineTextField1.SelectedText = "";
+            this.materialSingleLineTextField1.SelectionLength = 0;
+            this.materialSingleLineTextField1.SelectionStart = 0;
+            this.materialSingleLineTextField1.Size = new System.Drawing.Size(167, 23);
+            this.materialSingleLineTextField1.TabIndex = 15;
+            this.materialSingleLineTextField1.UseSystemPasswordChar = false;
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel1.Location = new System.Drawing.Point(7, 8);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(109, 19);
+            this.materialLabel1.TabIndex = 14;
+            this.materialLabel1.Text = "Book Number :";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(392, 196);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(120, 46);
+            this.button2.TabIndex = 13;
+            this.button2.Text = "Add";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(266, 196);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(120, 46);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Cancel";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(281, 153);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(228, 21);
+            this.comboBox2.TabIndex = 23;
+            // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel3.Location = new System.Drawing.Point(280, 129);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(79, 19);
+            this.materialLabel3.TabIndex = 22;
+            this.materialLabel3.Text = "Publisher :";
+            // 
+            // materialCheckBox1
+            // 
+            this.materialCheckBox1.AutoSize = true;
+            this.materialCheckBox1.Depth = 0;
+            this.materialCheckBox1.Font = new System.Drawing.Font("Roboto", 10F);
+            this.materialCheckBox1.Location = new System.Drawing.Point(389, 4);
+            this.materialCheckBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.materialCheckBox1.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialCheckBox1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCheckBox1.Name = "materialCheckBox1";
+            this.materialCheckBox1.Ripple = true;
+            this.materialCheckBox1.Size = new System.Drawing.Size(123, 30);
+            this.materialCheckBox1.TabIndex = 24;
+            this.materialCheckBox1.Text = "Reference Only";
+            this.materialCheckBox1.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(389, 47);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 25;
+            // 
+            // materialLabel5
+            // 
+            this.materialLabel5.AutoSize = true;
+            this.materialLabel5.Depth = 0;
+            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel5.Location = new System.Drawing.Point(243, 47);
+            this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel5.Name = "materialLabel5";
+            this.materialLabel5.Size = new System.Drawing.Size(139, 19);
+            this.materialLabel5.TabIndex = 27;
+            this.materialLabel5.Text = "Number of Copies :";
+            // 
+            // materialSingleLineTextField3
+            // 
+            this.materialSingleLineTextField3.Depth = 0;
+            this.materialSingleLineTextField3.Hint = "";
+            this.materialSingleLineTextField3.Location = new System.Drawing.Point(11, 218);
+            this.materialSingleLineTextField3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialSingleLineTextField3.Name = "materialSingleLineTextField3";
+            this.materialSingleLineTextField3.PasswordChar = '\0';
+            this.materialSingleLineTextField3.SelectedText = "";
+            this.materialSingleLineTextField3.SelectionLength = 0;
+            this.materialSingleLineTextField3.SelectionStart = 0;
+            this.materialSingleLineTextField3.Size = new System.Drawing.Size(105, 23);
+            this.materialSingleLineTextField3.TabIndex = 29;
+            this.materialSingleLineTextField3.UseSystemPasswordChar = false;
+            // 
+            // materialLabel6
+            // 
+            this.materialLabel6.AutoSize = true;
+            this.materialLabel6.Depth = 0;
+            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel6.Location = new System.Drawing.Point(7, 196);
+            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel6.Name = "materialLabel6";
+            this.materialLabel6.Size = new System.Drawing.Size(103, 19);
+            this.materialLabel6.TabIndex = 28;
+            this.materialLabel6.Text = "Version Year :";
+            // 
+            // materialLabel7
+            // 
+            this.materialLabel7.AutoSize = true;
+            this.materialLabel7.Depth = 0;
+            this.materialLabel7.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel7.Location = new System.Drawing.Point(128, 196);
+            this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel7.Name = "materialLabel7";
+            this.materialLabel7.Size = new System.Drawing.Size(69, 19);
+            this.materialLabel7.TabIndex = 30;
+            this.materialLabel7.Text = "Version :";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(132, 222);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(99, 20);
+            this.numericUpDown2.TabIndex = 31;
+            // 
+            // BookAddForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(521, 248);
+            this.Controls.Add(this.numericUpDown2);
+            this.Controls.Add(this.materialLabel7);
+            this.Controls.Add(this.materialSingleLineTextField3);
+            this.Controls.Add(this.materialLabel6);
+            this.Controls.Add(this.materialLabel5);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.materialCheckBox1);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.materialLabel3);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.materialLabel4);
+            this.Controls.Add(this.materialSingleLineTextField2);
+            this.Controls.Add(this.materialLabel2);
+            this.Controls.Add(this.materialSingleLineTextField1);
+            this.Controls.Add(this.materialLabel1);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "BookAddForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Add Book";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.ComboBox comboBox1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
+        private MaterialSkin.Controls.MaterialCheckBox materialCheckBox1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField3;
+        private MaterialSkin.Controls.MaterialLabel materialLabel6;
+        private MaterialSkin.Controls.MaterialLabel materialLabel7;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+    }
+}
