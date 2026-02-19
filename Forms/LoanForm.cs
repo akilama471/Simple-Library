@@ -13,14 +13,7 @@ using System.Windows.Forms;
 namespace SarasaviLibrary.Forms
 {
     public partial class LoanForm : Form
-    {
-        private Label lblMemberNIC;
-        private TextBox txtMemberNIC;
-        private Label lblCopyNumber;
-        private TextBox txtCopyNumber;
-        private Button btnLoan;
-        private Button btnCancel;
-
+    { 
         public LoanForm()
         {
             InitializeComponent();
@@ -29,42 +22,23 @@ namespace SarasaviLibrary.Forms
 
         private void InitializeCustomComponent()
         {
-            this.Size = new Size(400, 250);
-            this.Text = "Borrow Book";
-            this.StartPosition = FormStartPosition.CenterParent;
 
-            lblMemberNIC = new Label { Text = "Member NIC:", Location = new Point(20, 30), AutoSize = true };
-            txtMemberNIC = new TextBox { Location = new Point(120, 27), Width = 200 };
-
-            lblCopyNumber = new Label { Text = "Copy Number:", Location = new Point(20, 70), AutoSize = true };
-            txtCopyNumber = new TextBox { Location = new Point(120, 67), Width = 200 };
-
-            btnLoan = new Button { Text = "Loan", Location = new Point(120, 120), Width = 90, Height = 30 };
-            btnCancel = new Button { Text = "Cancel", Location = new Point(230, 120), Width = 90, Height = 30 };
-
-            btnLoan.Click += BtnLoan_Click;
-            btnCancel.Click += (s, e) => this.Close();
-
-            this.Controls.Add(lblMemberNIC);
-            this.Controls.Add(txtMemberNIC);
-            this.Controls.Add(lblCopyNumber);
-            this.Controls.Add(txtCopyNumber);
-            this.Controls.Add(btnLoan);
-            this.Controls.Add(btnCancel);
         }
 
         private void BtnLoan_Click(object sender, EventArgs e)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(txtMemberNIC.Text) || string.IsNullOrWhiteSpace(txtCopyNumber.Text))
+
+
+                if (string.IsNullOrWhiteSpace(memberNICInputField.Text) || string.IsNullOrWhiteSpace(bookCopyInputField.Text))
                 {
                     MessageBox.Show("Please enter Member NIC and Copy Number.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 MemberRepository memberRepo = new MemberRepository();
-                Member member = memberRepo.GetByNIC(txtMemberNIC.Text.Trim());
+                Member member = memberRepo.GetByNIC(memberNICInputField.Text.Trim());
 
                 if (member == null)
                 {
@@ -91,7 +65,7 @@ namespace SarasaviLibrary.Forms
 
                 // Check Copy availability
                 BookRepository bookRepo = new BookRepository();
-                Copy copy = bookRepo.GetCopyByNumber(txtCopyNumber.Text.Trim());
+                Copy copy = bookRepo.GetCopyByNumber(bookCopyInputField.Text.Trim());
 
                 if (copy == null)
                 {

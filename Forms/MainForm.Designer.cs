@@ -32,6 +32,9 @@
             this.ribbon1 = new System.Windows.Forms.Ribbon();
             this.ribbonTab1 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
+            this.InquiryRibbonButton = new System.Windows.Forms.RibbonButton();
+            this.loanRibbonButton = new System.Windows.Forms.RibbonButton();
+            this.returnRibbonButton = new System.Windows.Forms.RibbonButton();
             this.ribbonTab2 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel2 = new System.Windows.Forms.RibbonPanel();
             this.addBookRibbonButton = new System.Windows.Forms.RibbonButton();
@@ -64,7 +67,7 @@
             this.ribbon1.OrbDropDown.Size = new System.Drawing.Size(527, 447);
             this.ribbon1.OrbDropDown.TabIndex = 0;
             this.ribbon1.RibbonTabFont = new System.Drawing.Font("Trebuchet MS", 9F);
-            this.ribbon1.Size = new System.Drawing.Size(800, 127);
+            this.ribbon1.Size = new System.Drawing.Size(800, 133);
             this.ribbon1.TabIndex = 1;
             this.ribbon1.Tabs.Add(this.ribbonTab1);
             this.ribbon1.Tabs.Add(this.ribbonTab2);
@@ -81,8 +84,42 @@
             // 
             // ribbonPanel1
             // 
+            this.ribbonPanel1.Items.Add(this.InquiryRibbonButton);
+            this.ribbonPanel1.Items.Add(this.loanRibbonButton);
+            this.ribbonPanel1.Items.Add(this.returnRibbonButton);
             this.ribbonPanel1.Name = "ribbonPanel1";
             this.ribbonPanel1.Text = "ribbonPanel1";
+            // 
+            // InquiryRibbonButton
+            // 
+            this.InquiryRibbonButton.Image = ((System.Drawing.Image)(resources.GetObject("InquiryRibbonButton.Image")));
+            this.InquiryRibbonButton.LargeImage = ((System.Drawing.Image)(resources.GetObject("InquiryRibbonButton.LargeImage")));
+            this.InquiryRibbonButton.MinimumSize = new System.Drawing.Size(64, 0);
+            this.InquiryRibbonButton.Name = "InquiryRibbonButton";
+            this.InquiryRibbonButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("InquiryRibbonButton.SmallImage")));
+            this.InquiryRibbonButton.Text = "Inquiry";
+            this.InquiryRibbonButton.TextAlignment = System.Windows.Forms.RibbonItem.RibbonItemTextAlignment.Center;
+            this.InquiryRibbonButton.Click += new System.EventHandler(this.InquiryRibbonButton_Click);
+            // 
+            // loanRibbonButton
+            // 
+            this.loanRibbonButton.Image = ((System.Drawing.Image)(resources.GetObject("loanRibbonButton.Image")));
+            this.loanRibbonButton.LargeImage = ((System.Drawing.Image)(resources.GetObject("loanRibbonButton.LargeImage")));
+            this.loanRibbonButton.MinimumSize = new System.Drawing.Size(64, 0);
+            this.loanRibbonButton.Name = "loanRibbonButton";
+            this.loanRibbonButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("loanRibbonButton.SmallImage")));
+            this.loanRibbonButton.Text = "Loan";
+            this.loanRibbonButton.Click += new System.EventHandler(this.loanRibbonButton_Click);
+            // 
+            // returnRibbonButton
+            // 
+            this.returnRibbonButton.Image = ((System.Drawing.Image)(resources.GetObject("returnRibbonButton.Image")));
+            this.returnRibbonButton.LargeImage = ((System.Drawing.Image)(resources.GetObject("returnRibbonButton.LargeImage")));
+            this.returnRibbonButton.MinimumSize = new System.Drawing.Size(64, 0);
+            this.returnRibbonButton.Name = "returnRibbonButton";
+            this.returnRibbonButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("returnRibbonButton.SmallImage")));
+            this.returnRibbonButton.Text = "Return";
+            this.returnRibbonButton.Click += new System.EventHandler(this.returnRibbonButton_Click);
             // 
             // ribbonTab2
             // 
@@ -117,6 +154,7 @@
             this.findBookRibbonButton.Name = "findBookRibbonButton";
             this.findBookRibbonButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("findBookRibbonButton.SmallImage")));
             this.findBookRibbonButton.Text = "Find";
+            this.findBookRibbonButton.Click += new System.EventHandler(this.findBookRibbonButton_Click);
             // 
             // ribbonPanel3
             // 
@@ -245,5 +283,8 @@
         private System.Windows.Forms.RibbonPanel ribbonPanel5;
         private System.Windows.Forms.RibbonButton addPublisherRibbonButton;
         private System.Windows.Forms.RibbonButton findPublisherRibbonButton;
+        private System.Windows.Forms.RibbonButton InquiryRibbonButton;
+        private System.Windows.Forms.RibbonButton loanRibbonButton;
+        private System.Windows.Forms.RibbonButton returnRibbonButton;
     }
 }

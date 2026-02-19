@@ -166,5 +166,69 @@ namespace SarasaviLibrary.Forms
             authorList.StartPosition = FormStartPosition.CenterParent;
             authorList.Show();
         }
+
+        private void InquiryRibbonButton_Click(object sender, EventArgs e)
+        {
+            foreach (Form child in this.MdiChildren)
+            {
+                if (child is InquiryForm)
+                {
+                    child.Focus(); // Bring it to front
+                    return;        // Exit, don’t open new
+                }
+            }
+            InquiryForm inquiryForm = new InquiryForm();
+            inquiryForm.MdiParent = this;
+            inquiryForm.StartPosition = FormStartPosition.CenterParent;
+            inquiryForm.Show();
+        }
+
+        private void loanRibbonButton_Click(object sender, EventArgs e)
+        {
+            foreach (Form child in this.MdiChildren)
+            {
+                if (child is LoanForm)
+                {
+                    child.Focus(); // Bring it to front
+                    return;        // Exit, don’t open new
+                }
+            }
+            LoanForm loanForm = new LoanForm();
+            loanForm.MdiParent = this;
+            loanForm.StartPosition = FormStartPosition.CenterParent;
+            loanForm.Show();
+        }
+
+        private void returnRibbonButton_Click(object sender, EventArgs e)
+        {
+            foreach (Form child in this.MdiChildren)
+            {
+                if (child is ReturnForm)
+                {
+                    child.Focus(); // Bring it to front
+                    return;        // Exit, don’t open new
+                }
+            }
+            ReturnForm returnForm = new ReturnForm();
+            returnForm.MdiParent = this;
+            returnForm.StartPosition = FormStartPosition.CenterParent;
+            returnForm.Show();
+        }
+
+        private void findBookRibbonButton_Click(object sender, EventArgs e)
+        {
+            foreach (Form child in this.MdiChildren)
+            {
+                if (child is BookListForm)
+                {
+                    child.Focus(); // Bring it to front
+                    return;        // Exit, don’t open new
+                }
+            }
+            BookListForm bookListForm = new BookListForm();
+            bookListForm.MdiParent = this;
+            bookListForm.StartPosition = FormStartPosition.CenterParent;
+            bookListForm.Show();
+        }
     }
 }
