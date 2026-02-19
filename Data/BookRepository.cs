@@ -169,5 +169,33 @@ namespace SarasaviLibrary.Data
 
             return DatabaseHelper.ExecuteQuery(query, parameters.ToArray());
         }
+        public Copy GetCopyByNumber(string copyNumber)
+        {
+            string query = @"SELECT c.CopyId, c.IsAvailable, b.IsReferenceOnly, b.BookId 
+                             FROM Copies c 
+                             JOIN Books b ON c.BookId = b.BookId 
+                             WHERE c.CopyNumber = @CopyNumber";
+            
+            DataTable dt = DatabaseHelper.ExecuteQuery(query, new SqlParameter[] { new SqlParameter("@CopyNumber", copyNumber) });
+
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                return new Copy
+                {
+                    CopyId = Convert.ToInt32(row["CopyId"]),
+                    IsAvailable = Convert.ToBoolean(row["IsAvailable"]),
+                    BookId = Convert.ToInt32(row["BookId"]),
+                    // We can map Book.IsReferenceOnly here if we extend Copy model or just return a DTO.
+                    // Ideally, Copy has a Book property.
+                    Book = new Book 
+                    { 
+                        BookId = Convert.ToInt32(row["BookId"]),
+                        IsReferenceOnly = Convert.ToBoolean(row["IsReferenceOnly"]) 
+                    }
+                };
+            }
+            return null;
+        }
     }
 }

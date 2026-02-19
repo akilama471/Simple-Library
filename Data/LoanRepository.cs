@@ -94,5 +94,28 @@ namespace SarasaviLibrary.Data
             };
             return Convert.ToInt32(DatabaseHelper.ExecuteScalar(query, parameters)) > 0;
         }
+        public Loan GetActiveLoanByCopyNumber(string copyNumber)
+        {
+            string query = @"SELECT l.LoanId, l.LoanDate, l.DueDate, m.Name as MemberName, m.NIC 
+                             FROM Loans l 
+                             JOIN Copies c ON l.CopyId = c.CopyId 
+                             JOIN Members m ON l.MemberId = m.MemberId 
+                             WHERE c.CopyNumber = @CopyNumber AND l.IsReturned = 0";
+            
+            DataTable dt = DatabaseHelper.ExecuteQuery(query, new SqlParameter[] { new SqlParameter("@CopyNumber", copyNumber) });
+
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                return new Loan
+                {
+                    LoanId = Convert.ToInt32(row["LoanId"]),
+                    LoanDate = Convert.ToDateTime(row["LoanDate"]),
+                    DueDate = Convert.ToDateTime(row["DueDate"]),
+                    Member = new Member { Name = row["MemberName"].ToString(), NIC = row["NIC"].ToString() }
+                };
+            }
+            return null;
+        }
     }
 }

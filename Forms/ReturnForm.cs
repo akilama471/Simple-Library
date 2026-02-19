@@ -65,22 +65,14 @@ namespace SarasaviLibrary.Forms
                     return;
                 }
 
-                string query = @"SELECT l.LoanId, l.LoanDate, l.DueDate, m.Name as MemberName, m.NIC 
-                                 FROM Loans l 
-                                 JOIN Copies c ON l.CopyId = c.CopyId 
-                                 JOIN Members m ON l.MemberId = m.MemberId 
-                                 WHERE c.CopyNumber = @CopyNumber AND l.IsReturned = 0";
-                
-                DataTable dt = DatabaseHelper.ExecuteQuery(query, new System.Data.SqlClient.SqlParameter[] { new System.Data.SqlClient.SqlParameter("@CopyNumber", txtCopyNumber.Text.Trim()) });
+                LoanRepository loanRepo = new LoanRepository();
+                Loan loan = loanRepo.GetActiveLoanByCopyNumber(txtCopyNumber.Text.Trim());
 
-                if (dt.Rows.Count > 0)
+                if (loan != null)
                 {
-                    DataRow row = dt.Rows[0];
-                    _currentLoanId = Convert.ToInt32(row["LoanId"]);
-                    string memberName = row["MemberName"].ToString();
-                    DateTime dueDate = Convert.ToDateTime(row["DueDate"]);
+                    _currentLoanId = loan.LoanId;
                     
-                    lblInfo.Text = $"Borrowed by: {memberName}\nDue Date: {dueDate.ToShortDateString()}\nStatus: Active Loan";
+                    lblInfo.Text = $"Borrowed by: {loan.Member.Name} (NIC: {loan.Member.NIC})\nDue Date: {loan.DueDate.ToShortDateString()}\nStatus: Active Loan";
                     btnReturn.Enabled = true;
                 }
                 else
@@ -128,26 +120,18 @@ namespace SarasaviLibrary.Forms
 
         private void CheckReservations(string copyNumber)
         {
-            // Find BookId
-             string query = @"SELECT BookId FROM Copies WHERE CopyNumber = @CopyNumber";
-             object result = DatabaseHelper.ExecuteScalar(query, new System.Data.SqlClient.SqlParameter[] { new System.Data.SqlClient.SqlParameter("@CopyNumber", copyNumber) });
-             
-             if (result != null)
+             ReservationRepository resRepo = new ReservationRepository();
+             Reservation res = resRepo.GetOldestReservationByCopyNumber(copyNumber);
+
+             if (res != null)
              {
-                 int bookId = Convert.ToInt32(result);
-                 ReservationRepository resRepo = new ReservationRepository();
-                 Reservation res = resRepo.GetOldestReservation(bookId);
+                 // Notify
+                 MemberRepository memberRepo = new MemberRepository();
+                 Member member = memberRepo.GetById(res.MemberId);
+                 MessageBox.Show($"Book is reserved by {member.Name} (NIC: {member.NIC}). Please notify them.", "Reservation Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                 if (res != null)
-                 {
-                     // Notify
-                     MemberRepository memberRepo = new MemberRepository();
-                     Member member = memberRepo.GetById(res.MemberId);
-                     MessageBox.Show($"Book is reserved by {member.Name} (NIC: {member.NIC}). Please notify them.", "Reservation Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                     // Delete reservation
-                     resRepo.Remove(res.ReservationId);
-                 }
+                 // Delete reservation
+                 resRepo.Remove(res.ReservationId);
              }
         }
     }

@@ -48,5 +48,18 @@ namespace SarasaviLibrary.Data
             SqlParameter[] parameters = { new SqlParameter("@Id", reservationId) };
             DatabaseHelper.ExecuteNonQuery(query, parameters);
         }
+        public Reservation GetOldestReservationByCopyNumber(string copyNumber)
+        {
+             // First get BookId from CopyNumber
+             string queryBookId = "SELECT BookId FROM Copies WHERE CopyNumber = @CopyNumber";
+             object result = DatabaseHelper.ExecuteScalar(queryBookId, new SqlParameter[] { new SqlParameter("@CopyNumber", copyNumber) });
+             
+             if (result != null)
+             {
+                 int bookId = Convert.ToInt32(result);
+                 return GetOldestReservation(bookId);
+             }
+             return null;
+        }
     }
 }

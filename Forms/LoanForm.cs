@@ -90,28 +90,18 @@ namespace SarasaviLibrary.Forms
                 }
 
                 // Check Copy availability
-                // Need a method in BookRepository to get Copy by Number (or just query it here via helper, or add to Repo)
-                // Using DatabaseHelper directly for quick check or add GetByCopyNumber to BookRepo.
-                // Better to add to BookRepository. I didn't add it yet.
-                // I'll add a helper query here using DatabaseHelper for now to keep it simple, or better, add to Repository.
-                
-                string copyQuery = @"SELECT c.CopyId, c.IsAvailable, b.IsReferenceOnly 
-                                     FROM Copies c 
-                                     JOIN Books b ON c.BookId = b.BookId 
-                                     WHERE c.CopyNumber = @CopyNumber";
-                
-                DataTable dt = DatabaseHelper.ExecuteQuery(copyQuery, new System.Data.SqlClient.SqlParameter[] { new System.Data.SqlClient.SqlParameter("@CopyNumber", txtCopyNumber.Text.Trim()) });
+                BookRepository bookRepo = new BookRepository();
+                Copy copy = bookRepo.GetCopyByNumber(txtCopyNumber.Text.Trim());
 
-                if (dt.Rows.Count == 0)
+                if (copy == null)
                 {
                     MessageBox.Show("Book copy not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                DataRow row = dt.Rows[0];
-                int copyId = Convert.ToInt32(row["CopyId"]);
-                bool isAvailable = Convert.ToBoolean(row["IsAvailable"]);
-                bool isReferenceOnly = Convert.ToBoolean(row["IsReferenceOnly"]);
+                int copyId = copy.CopyId;
+                bool isAvailable = copy.IsAvailable;
+                bool isReferenceOnly = copy.Book.IsReferenceOnly;
 
                 // Rule 3: Available
                 if (!isAvailable)
