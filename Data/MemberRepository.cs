@@ -1,69 +1,103 @@
-﻿using System;
+﻿using SarasaviLibrary.Models;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
-using SarasaviLibrary.Models;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SarasaviLibrary.Data
 {
     public class MemberRepository
     {
-        private string connectionString;
-
-        public MemberRepository()
+        public void Add(Member member)
         {
-            connectionString = ConfigurationManager.ConnectionStrings["LibraryDB"].ConnectionString;
+            string query = "INSERT INTO Members (Name, NIC, Address, Sex) VALUES (@Name, @NIC, @Address, @Sex)";
+            SqlParameter[] parameters = {
+                new SqlParameter("@Name", member.Name),
+                new SqlParameter("@NIC", member.NIC),
+                new SqlParameter("@Address", member.Address),
+                new SqlParameter("@Sex", member.Sex)
+            };
+            DatabaseHelper.ExecuteNonQuery(query, parameters);
         }
 
-        public bool AddMember(Member member, out string errorMessage)
+        public List<Member> GetAll()
         {
-            errorMessage = "";
+            List<Member> members = new List<Member>();
+            string query = "SELECT * FROM Members";
+            DataTable dt = DatabaseHelper.ExecuteQuery(query);
 
-            try
+            foreach (DataRow row in dt.Rows)
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                members.Add(new Member
                 {
-                    conn.Open();
-
-                    string sql = "INSERT INTO Members (Name, NIC, Address, Sex) VALUES (@Name, @NIC, @Address, @Sex)";
-
-                    using (SqlCommand cmd = new SqlCommand(sql, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@Name", member.Name);
-                        cmd.Parameters.AddWithValue("@NIC", member.NIC);
-                        cmd.Parameters.AddWithValue("@Address", member.Address);
-                        cmd.Parameters.AddWithValue("@Sex", member.Sex);
-
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                return true; // success
+                    MemberId = Convert.ToInt32(row["MemberId"]),
+                    Name = row["Name"].ToString(),
+                    NIC = row["NIC"].ToString(),
+                    Address = row["Address"].ToString(),
+                    Sex = row["Sex"].ToString()
+                });
             }
-            catch (SqlException ex)
-            {
-                errorMessage = "Database error: " + ex.Message;
-                return false;
-            }
-            catch (Exception ex)
-            {
-                errorMessage = "Unexpected error: " + ex.Message;
-                return false;
-            }
+
+            return members;
         }
 
-        public DataTable GetAllMembers()
+        public Member GetByNIC(string nic)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            string query = "SELECT * FROM Members WHERE NIC = @NIC";
+            SqlParameter[] parameters = {
+                new SqlParameter("@NIC", nic)
+            };
+            DataTable dt = DatabaseHelper.ExecuteQuery(query, parameters);
+
+            if (dt.Rows.Count > 0)
             {
-                conn.Open();
-                string sql = "SELECT * FROM Members";
-                using (SqlDataAdapter da = new SqlDataAdapter(sql, conn))
+                DataRow row = dt.Rows[0];
+                return new Member
                 {
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    return dt;
-                }
+                    MemberId = Convert.ToInt32(row["MemberId"]),
+                    Name = row["Name"].ToString(),
+                    NIC = row["NIC"].ToString(),
+                    Address = row["Address"].ToString(),
+                    Sex = row["Sex"].ToString()
+                };
             }
+
+            return null;
+        }
+
+        public Member GetById(int id)
+        {
+            string query = "SELECT * FROM Members WHERE MemberId = @Id";
+            SqlParameter[] parameters = {
+                new SqlParameter("@Id", id)
+            };
+            DataTable dt = DatabaseHelper.ExecuteQuery(query, parameters);
+
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                return new Member
+                {
+                    MemberId = Convert.ToInt32(row["MemberId"]),
+                    Name = row["Name"].ToString(),
+                    NIC = row["NIC"].ToString(),
+                    Address = row["Address"].ToString(),
+                    Sex = row["Sex"].ToString()
+                };
+            }
+
+            return null;
+        }
+
+        public bool IsNicExists(string nic)
+        {
+            string query = "SELECT COUNT(*) FROM Members WHERE NIC = @NIC";
+            SqlParameter[] parameters = { new SqlParameter("@NIC", nic) };
+            int count = Convert.ToInt32(DatabaseHelper.ExecuteScalar(query, parameters));
+            return count > 0;
         }
     }
 }

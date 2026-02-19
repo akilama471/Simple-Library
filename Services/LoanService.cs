@@ -10,26 +10,28 @@ namespace SarasaviLibrary.Services
 {
     public class LoanService
     {
+        private LoanRepository _loanRepo = new LoanRepository();
+
         public string BorrowBook(Member member, Copy copy)
         {
             if (!copy.IsAvailable)
                 return "Book not available";
 
-            if (member.BorrowedBooks.Count >= 5)
-                return "Maximum 5 books allowed";
+            if (_loanRepo.GetActiveLoanCount(member.MemberId) >= 5)
+                return "Maximum 5 borrowed books allowed";
+
+            if (_loanRepo.HasOverdueLoans(member.MemberId))
+                return "Member has overdue books";
 
             Loan loan = new Loan
             {
-                Borrower = member,
-                BorrowedCopy = copy,
+                MemberId = member.MemberId,
+                CopyId = copy.CopyId,
                 LoanDate = DateTime.Now,
                 DueDate = DateTime.Now.AddDays(14)
             };
 
-            member.BorrowedBooks.Add(loan);
-            LibraryData.Loans.Add(loan);
-
-            copy.IsAvailable = false;
+            _loanRepo.AddLoan(loan);
 
             return "Loan successful";
         }

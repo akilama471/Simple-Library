@@ -55,10 +55,18 @@
   <ItemGroup>
     <Compile Include="Data\AuthorRepository.cs" />
     <Compile Include="Data\BookRepository.cs" />
-    <Compile Include="Data\LibraryData.cs" />
+    <Compile Include="Data\DatabaseHelper.cs" />
+    <Compile Include="Data\DatabaseInitializer.cs" />
     <Compile Include="Data\LoanRepository.cs" />
     <Compile Include="Data\MemberRepository.cs" />
     <Compile Include="Data\PublisherRepository.cs" />
+    <Compile Include="Data\ReservationRepository.cs" />
+    <Compile Include="Forms\InquiryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InquiryForm.Designer.cs">
+      <DependentUpon>InquiryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AuthorListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +133,7 @@
     <Compile Include="Models\Loan.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Publisher.cs" />
+    <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

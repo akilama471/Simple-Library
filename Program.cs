@@ -17,6 +17,18 @@ namespace SarasaviLibrary
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            
+            // Initialize Database
+            try
+            {
+                Data.DatabaseInitializer.Initialize();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Database initialization failed: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             Application.Run(new MainForm());
         }
     }

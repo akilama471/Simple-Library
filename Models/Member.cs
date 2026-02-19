@@ -8,6 +8,9 @@ namespace SarasaviLibrary.Models
 {
     public class Member : User
     {
-        public List<Loan> BorrowedBooks { get; set; } = new List<Loan>();
+        public int MemberId { get; set; }
+        
+        // Navigation property for loans
+        public List<Loan> Loans { get; set; } = new List<Loan>();
     }
 }

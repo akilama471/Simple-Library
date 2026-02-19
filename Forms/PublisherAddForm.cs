@@ -21,14 +21,13 @@ namespace SarasaviLibrary.Forms
 
         private void submitPublisherFromButton_Click(object sender, EventArgs e)
         {
-
             if (string.IsNullOrWhiteSpace(publisherNameInputField.Text))
             {
                 MessageBox.Show("Please fill all required fields.");
                 return;
             }
 
-            // Create Member object
+            // Create Publisher object
             Publisher publisher = new Publisher
             {
                 Name = publisherNameInputField.Text,
@@ -37,17 +36,15 @@ namespace SarasaviLibrary.Forms
             // Save to database
             PublisherRepository repo = new PublisherRepository();
 
-            string error;
-            bool success = repo.AddPublisher(publisher, out error);
-
-            if (success)
+            try
             {
+                repo.Add(publisher);
                 MessageBox.Show("Publisher added successfully!");
                 this.Close();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error adding publisher: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

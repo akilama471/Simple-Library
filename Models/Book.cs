@@ -8,12 +8,24 @@ namespace SarasaviLibrary.Models
 {
     public class Book
     {
-        public string BookNumber { get; set; }
+        public int BookId { get; set; }
+        
+        // This can be used for display or legacy purposes, but ID is primary
+        public string BookNumber { get; set; } 
+        
         public string Title { get; set; }
+        
+        public int AuthorId { get; set; }
         public Author Author { get; set; }
-        public string VersionYear { get; set; }
-        public string VersionNumber { get; set; }
+        
+        public int PublisherId { get; set; }
+        public Publisher Publisher { get; set; }
+        
+        public string Classification { get; set; }
+        
         public bool IsReferenceOnly { get; set; }
+
+        // Copies associated with this book
         public List<Copy> Copies { get; set; } = new List<Copy>();
     }
 }

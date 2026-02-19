@@ -15,7 +15,44 @@ namespace SarasaviLibrary.Forms
         public MainForm()
         {
             InitializeComponent();
+            InitializeMenu();
         }
+
+        private void InitializeMenu()
+        {
+            MenuStrip menuStrip = new MenuStrip();
+            ToolStripMenuItem transactionsMenu = new ToolStripMenuItem("Transactions");
+
+            ToolStripMenuItem loanMenuItem = new ToolStripMenuItem("Borrow Book");
+            loanMenuItem.Click += (s, e) =>
+            {
+                LoanForm loanForm = new LoanForm();
+                loanForm.ShowDialog();
+            };
+
+            ToolStripMenuItem returnMenuItem = new ToolStripMenuItem("Return Book");
+            returnMenuItem.Click += (s, e) =>
+            {
+                ReturnForm returnForm = new ReturnForm();
+                returnForm.ShowDialog();
+            };
+
+            ToolStripMenuItem inquiryMenuItem = new ToolStripMenuItem("Inquiry"); // Adding Inquiry too
+            inquiryMenuItem.Click += (s, e) =>
+            {
+                InquiryForm inquiryForm = new InquiryForm();
+                inquiryForm.ShowDialog();
+            };
+
+            transactionsMenu.DropDownItems.Add(loanMenuItem);
+            transactionsMenu.DropDownItems.Add(returnMenuItem);
+            // transactionsMenu.DropDownItems.Add(inquiryMenuItem);
+
+            menuStrip.Items.Add(transactionsMenu);
+            this.MainMenuStrip = menuStrip;
+            this.Controls.Add(menuStrip);
+        }
+        
 
         private void addMemberRibbonButton_Click(object sender, EventArgs e)
         {

@@ -43,17 +43,21 @@ namespace SarasaviLibrary.Forms
             // Save to database
             MemberRepository repo = new MemberRepository();
 
-            string error;
-            bool success = repo.AddMember(member, out error);
-
-            if (success)
+            try
             {
+                if (repo.IsNicExists(member.NIC))
+                {
+                    MessageBox.Show("A member with this NIC already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                repo.Add(member);
                 MessageBox.Show("Member added successfully!");
                 this.Close();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error adding member: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

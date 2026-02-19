@@ -8,10 +8,16 @@ namespace SarasaviLibrary.Models
 {
     public class Loan
     {
-        public Copy BorrowedCopy { get; set; }
-        public Member Borrower { get; set; }
+        public int LoanId { get; set; }
+        
+        public int CopyId { get; set; }
+        public Copy Copy { get; set; }
+        
+        public int MemberId { get; set; }
+        public Member Member { get; set; }
+        
         public DateTime LoanDate { get; set; }
         public DateTime DueDate { get; set; }
-        public bool IsReturned { get; set; } = false;
+        public bool IsReturned { get; set; }
     }
 }

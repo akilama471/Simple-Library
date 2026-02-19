@@ -1,7 +1,6 @@
 ﻿using SarasaviLibrary.Models;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,59 +11,52 @@ namespace SarasaviLibrary.Data
 {
     public class PublisherRepository
     {
-        private string connectionString;
-
-        public PublisherRepository()
+        public void Add(Publisher publisher)
         {
-            connectionString = ConfigurationManager.ConnectionStrings["LibraryDB"].ConnectionString;
+            string query = "INSERT INTO Publishers (Name) VALUES (@Name)";
+            SqlParameter[] parameters = {
+                new SqlParameter("@Name", publisher.Name)
+            };
+            DatabaseHelper.ExecuteNonQuery(query, parameters);
         }
 
-        public bool AddPublisher(Publisher publisher, out string errorMessage)
+        public List<Publisher> GetAll()
         {
-            errorMessage = "";
+            List<Publisher> publishers = new List<Publisher>();
+            string query = "SELECT * FROM Publishers";
+            DataTable dt = DatabaseHelper.ExecuteQuery(query);
 
-            try
+            foreach (DataRow row in dt.Rows)
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                publishers.Add(new Publisher
                 {
-                    conn.Open();
-
-                    string sql = "INSERT INTO Publishers (Name) VALUES (@Name)";
-
-                    using (SqlCommand cmd = new SqlCommand(sql, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@Name", publisher.Name);
-
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                return true; // success
+                    PublisherId = Convert.ToInt32(row["PublisherId"]),
+                    Name = row["Name"].ToString()
+                });
             }
-            catch (SqlException ex)
-            {
-                errorMessage = "Database error: " + ex.Message;
-                return false;
-            }
-            catch (Exception ex)
-            {
-                errorMessage = "Unexpected error: " + ex.Message;
-                return false;
-            }
+
+            return publishers;
         }
 
-        public DataTable GetAllPublisher()
+        public Publisher GetById(int id)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            string query = "SELECT * FROM Publishers WHERE PublisherId = @Id";
+            SqlParameter[] parameters = {
+                new SqlParameter("@Id", id)
+            };
+            DataTable dt = DatabaseHelper.ExecuteQuery(query, parameters);
+
+            if (dt.Rows.Count > 0)
             {
-                conn.Open();
-                string sql = "SELECT * FROM Publishers";
-                using (SqlDataAdapter da = new SqlDataAdapter(sql, conn))
+                DataRow row = dt.Rows[0];
+                return new Publisher
                 {
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    return dt;
-                }
+                    PublisherId = Convert.ToInt32(row["PublisherId"]),
+                    Name = row["Name"].ToString()
+                };
             }
+
+            return null;
         }
     }
 }

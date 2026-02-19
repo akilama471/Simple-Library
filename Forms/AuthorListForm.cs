@@ -20,9 +20,12 @@ namespace SarasaviLibrary.Forms
         private void LoadAuthors()
         {
             AuthorRepository repo = new AuthorRepository();
-            DataTable dt = repo.GetAllAuthors();
+            List<SarasaviLibrary.Models.Author> authors = repo.GetAll();
 
-            authorDataGridView.DataSource = dt;
+            // Convert List to DataTable or use BindingSource if needed, but direct list binding works for grids mostly.
+            // However, to match previous behavior if it expected DataTable, we might need to adjust.
+            // Let's bind the List directly.
+            authorDataGridView.DataSource = authors;
         }
 
         private void AuthorListForm_Load(object sender, EventArgs e)

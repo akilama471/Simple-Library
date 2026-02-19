@@ -20,9 +20,9 @@ namespace SarasaviLibrary.Forms
         private void LoadMembers()
         {
             MemberRepository repo = new MemberRepository();
-            DataTable dt = repo.GetAllMembers();
+            List<SarasaviLibrary.Models.Member> members = repo.GetAll();
 
-            memberDataGridView.DataSource = dt;
+            memberDataGridView.DataSource = members;
         }
 
         private void MemberListForm_Load(object sender, EventArgs e)

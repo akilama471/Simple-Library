@@ -22,9 +22,9 @@ namespace SarasaviLibrary.Forms
         private void LoadAuthors()
         {
             PublisherRepository repo = new PublisherRepository();
-            DataTable dt = repo.GetAllPublisher();
+            List<SarasaviLibrary.Models.Publisher> publishers = repo.GetAll();
 
-            publisherDataGridView.DataSource = dt;
+            publisherDataGridView.DataSource = publishers;
         }
 
         private void PublisherListForm_Load(object sender, EventArgs e)

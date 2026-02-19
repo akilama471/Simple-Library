@@ -21,14 +21,13 @@ namespace SarasaviLibrary.Forms
 
         private void submitAuthorFromButton_Click(object sender, EventArgs e)
         {
-
             if (string.IsNullOrWhiteSpace(authorNameInputField.Text))
             {
                 MessageBox.Show("Please fill all required fields.");
                 return;
             }
 
-            // Create Member object
+            // Create Author object
             Author author = new Author
             {
                 Name = authorNameInputField.Text,
@@ -37,17 +36,15 @@ namespace SarasaviLibrary.Forms
             // Save to database
             AuthorRepository repo = new AuthorRepository();
 
-            string error;
-            bool success = repo.AddAuthor(author, out error);
-
-            if (success)
+            try
             {
+                repo.Add(author);
                 MessageBox.Show("Author added successfully!");
                 this.Close();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error adding author: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
