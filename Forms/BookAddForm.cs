@@ -18,6 +18,9 @@ namespace SarasaviLibrary.Forms
         {
             InitializeComponent();
             LoadMetadata();
+            // Disable Book Number input as it is auto-generated
+            materialSingleLineTextField1.Enabled = false;
+            materialSingleLineTextField1.Text = "Auto-Generated";
             button2.Click += AddButton_Click;
             button1.Click += CancelButton_Click;
         }
@@ -50,12 +53,12 @@ namespace SarasaviLibrary.Forms
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(materialSingleLineTextField1.Text) || 
-                string.IsNullOrWhiteSpace(materialSingleLineTextField2.Text) ||
+            if (string.IsNullOrWhiteSpace(materialSingleLineTextField2.Text) ||
+                string.IsNullOrWhiteSpace(isbnTextField.Text) || // ISBN Check
                 comboBox1.SelectedItem == null ||
                 comboBox2.SelectedItem == null)
             {
-                MessageBox.Show("Please fill all required fields (Book Number, Title, Author, Publisher).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please fill all required fields (Title, Author, Publisher, ISBN).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -63,12 +66,15 @@ namespace SarasaviLibrary.Forms
             {
                 Book book = new Book
                 {
-                    BookNumber = materialSingleLineTextField1.Text,
+                    // BookNumber is auto-generated in Repository
                     Title = materialSingleLineTextField2.Text,
                     AuthorId = (int)comboBox1.SelectedValue,
                     PublisherId = (int)comboBox2.SelectedValue,
-                    Classification = materialSingleLineTextField3.Text, // Using Version Year field as Classification for now
-                    IsReferenceOnly = materialCheckBox1.Checked
+                    Classification = materialSingleLineTextField3.Text, 
+                    ISBN = isbnTextField.Text,
+                    Edition = editionTextField.Text,
+                    // Note: IsReferenceOnly on Book is legacy/default, actual check is on Copy
+                    IsReferenceOnly = materialCheckBox1.Checked 
                 };
 
                 // Create copies
@@ -79,20 +85,44 @@ namespace SarasaviLibrary.Forms
                     return;
                 }
 
-                for (int i = 1; i <= copyCount; i++)
+                if (copyCount > 0)
                 {
-                    book.Copies.Add(new Copy
+                    for (int i = 1; i <= copyCount; i++)
                     {
-                        CopyNumber = $"{book.BookNumber}-{i}",
-                        IsAvailable = true
-                    });
+                        book.Copies.Add(new Copy
+                        {
+                            // CopyNumber prefix will be updated in Repository
+                            CopyNumber = $"TEMP-{i}",
+                            IsAvailable = true,
+                            IsReferenceOnly = materialCheckBox1.Checked // Apply checkbox to initial copies
+                        });
+                    }
                 }
 
                 BookRepository repo = new BookRepository();
                 repo.Add(book);
 
-                MessageBox.Show("Book added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Book added successfully!\nBook Number: {book.BookNumber}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                // Check for Unique Constraint Violation (Error 2627 or 2601)
+                if (ex.Number == 2627 || ex.Number == 2601)
+                {
+                     if (ex.Message.Contains("ISBN"))
+                     {
+                         MessageBox.Show("A book with this ISBN already exists. ISBN must be unique.", "Duplicate ISBN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                     }
+                     else
+                     {
+                         MessageBox.Show("A duplicate record exists.", "Duplicate Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                     }
+                }
+                else
+                {
+                    MessageBox.Show($"Database error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {

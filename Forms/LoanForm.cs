@@ -75,7 +75,9 @@ namespace SarasaviLibrary.Forms
 
                 int copyId = copy.CopyId;
                 bool isAvailable = copy.IsAvailable;
-                bool isReferenceOnly = copy.Book.IsReferenceOnly;
+                
+                // Rule 4: Reference only (Now configured at Copy level)
+                bool isReferenceOnly = copy.IsReferenceOnly; 
 
                 // Rule 3: Available
                 if (!isAvailable)
@@ -84,10 +86,9 @@ namespace SarasaviLibrary.Forms
                     return;
                 }
 
-                // Rule 4: Reference only
                 if (isReferenceOnly)
                 {
-                    MessageBox.Show("Reference-only books cannot be borrowed.", "Restricted", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Reference-only copies cannot be borrowed.", "Restricted", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 

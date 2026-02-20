@@ -43,10 +43,15 @@
             // 
             // authorDataGridView
             // 
+            this.authorDataGridView.AllowUserToAddRows = false;
+            this.authorDataGridView.AllowUserToDeleteRows = false;
+            this.authorDataGridView.AllowUserToOrderColumns = true;
+            this.authorDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.authorDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.authorDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.authorDataGridView.Location = new System.Drawing.Point(0, 45);
             this.authorDataGridView.Name = "authorDataGridView";
+            this.authorDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.authorDataGridView.Size = new System.Drawing.Size(800, 405);
             this.authorDataGridView.TabIndex = 1;
             // 

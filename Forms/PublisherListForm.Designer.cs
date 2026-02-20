@@ -43,6 +43,7 @@
             // 
             // publisherDataGridView
             // 
+            this.publisherDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.publisherDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.publisherDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.publisherDataGridView.Location = new System.Drawing.Point(0, 49);

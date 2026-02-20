@@ -15,9 +15,30 @@ namespace SarasaviLibrary.Forms
 {
     public partial class MemberAddForm : Form
     {
-        public MemberAddForm()
+        private Member _memberToEdit;
+        private MemberRepository _repo;
+
+        public MemberAddForm(Member memberToEdit = null)
         {
             InitializeComponent();
+            _memberToEdit = memberToEdit;
+            _repo = new MemberRepository();
+
+            if (_memberToEdit != null)
+            {
+                this.Text = "Edit Member";
+                // Assuming button exists and is named submitMemberFromButton
+                submitMemberFromButton.Text = "Update Member"; 
+                LoadMemberData();
+            }
+        }
+
+        private void LoadMemberData()
+        {
+            memberNameInputField.Text = _memberToEdit.Name;
+            memberNICInputField.Text = _memberToEdit.NIC;
+            memberAddressInputField.Text = _memberToEdit.Address;
+            memberSexInputField.SelectedItem = _memberToEdit.Sex;
         }
 
         private void submitMemberFromButton_Click(object sender, EventArgs e)
@@ -31,33 +52,56 @@ namespace SarasaviLibrary.Forms
                 return;
             }
 
-            // Create Member object
-            Member member = new Member
-            {
-                Name = memberNameInputField.Text,
-                NIC = memberNICInputField.Text,
-                Address = memberAddressInputField.Text,
-                Sex = memberSexInputField.SelectedItem.ToString()
-            };
-
-            // Save to database
-            MemberRepository repo = new MemberRepository();
-
             try
             {
-                if (repo.IsNicExists(member.NIC))
+                if (_memberToEdit == null)
                 {
-                    MessageBox.Show("A member with this NIC already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    // Add New Member
+                    Member member = new Member
+                    {
+                        Name = memberNameInputField.Text,
+                        NIC = memberNICInputField.Text,
+                        Address = memberAddressInputField.Text,
+                        Sex = memberSexInputField.SelectedItem.ToString()
+                    };
+
+                    if (_repo.IsNicExists(member.NIC))
+                    {
+                        MessageBox.Show("A member with this NIC already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    _repo.Add(member);
+                    MessageBox.Show($"Member added successfully! User Number: {member.UserNumber}");
+                }
+                else
+                {
+                    // Update Existing Member
+                    _memberToEdit.Name = memberNameInputField.Text;
+                    _memberToEdit.NIC = memberNICInputField.Text;
+                    _memberToEdit.Address = memberAddressInputField.Text;
+                    _memberToEdit.Sex = memberSexInputField.SelectedItem.ToString();
+                    
+                    // Check NIC uniqueness only if NIC changed
+                    // Note: Ideally IsNicExists should exclude current member ID, but for now assuming user handles it or we catch SQL error? 
+                    // Let's rely on basic check or just proceed. 
+                    // Better: GetByNIC and check if ID is different.
+                    Member existingParams = _repo.GetByNIC(_memberToEdit.NIC);
+                    if (existingParams != null && existingParams.MemberId != _memberToEdit.MemberId)
+                    {
+                         MessageBox.Show("A member with this NIC already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                         return;
+                    }
+
+                    _repo.Update(_memberToEdit);
+                    MessageBox.Show("Member updated successfully!");
                 }
 
-                repo.Add(member);
-                MessageBox.Show("Member added successfully!");
                 this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding member: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error processing member: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

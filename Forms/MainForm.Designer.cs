@@ -45,11 +45,11 @@
             this.ribbonPanel5 = new System.Windows.Forms.RibbonPanel();
             this.addPublisherRibbonButton = new System.Windows.Forms.RibbonButton();
             this.findPublisherRibbonButton = new System.Windows.Forms.RibbonButton();
-            this.ribbonTab3 = new System.Windows.Forms.RibbonTab();
-            this.ribbonPanel4 = new System.Windows.Forms.RibbonPanel();
+            this.ribbonTab4 = new System.Windows.Forms.RibbonTab();
+            this.ribbonPanel6 = new System.Windows.Forms.RibbonPanel();
             this.addMemberRibbonButton = new System.Windows.Forms.RibbonButton();
             this.findMemberRibbonButton = new System.Windows.Forms.RibbonButton();
-            this.ribbonTab4 = new System.Windows.Forms.RibbonTab();
+            this.ribbonSeparator1 = new System.Windows.Forms.RibbonSeparator();
             this.SuspendLayout();
             // 
             // ribbon1
@@ -63,18 +63,25 @@
             // 
             this.ribbon1.OrbDropDown.BorderRoundness = 8;
             this.ribbon1.OrbDropDown.Location = new System.Drawing.Point(0, 0);
+            this.ribbon1.OrbDropDown.MenuItems.Add(this.ribbonSeparator1);
             this.ribbon1.OrbDropDown.Name = "";
-            this.ribbon1.OrbDropDown.Size = new System.Drawing.Size(527, 447);
+            this.ribbon1.OrbDropDown.Size = new System.Drawing.Size(527, 75);
             this.ribbon1.OrbDropDown.TabIndex = 0;
+            this.ribbon1.OrbStyle = System.Windows.Forms.RibbonOrbStyle.Office_2013;
+            this.ribbon1.OrbVisible = false;
+            // 
+            // 
+            // 
+            this.ribbon1.QuickAccessToolbar.Visible = false;
             this.ribbon1.RibbonTabFont = new System.Drawing.Font("Trebuchet MS", 9F);
             this.ribbon1.Size = new System.Drawing.Size(800, 133);
             this.ribbon1.TabIndex = 1;
             this.ribbon1.Tabs.Add(this.ribbonTab1);
             this.ribbon1.Tabs.Add(this.ribbonTab2);
-            this.ribbon1.Tabs.Add(this.ribbonTab3);
             this.ribbon1.Tabs.Add(this.ribbonTab4);
+            this.ribbon1.TabSpacing = 4;
             this.ribbon1.Text = "ribbon1";
-            this.ribbon1.ThemeColor = System.Windows.Forms.RibbonTheme.Halloween;
+            this.ribbon1.ThemeColor = System.Windows.Forms.RibbonTheme.JellyBelly;
             // 
             // ribbonTab1
             // 
@@ -127,7 +134,8 @@
             this.ribbonTab2.Panels.Add(this.ribbonPanel2);
             this.ribbonTab2.Panels.Add(this.ribbonPanel3);
             this.ribbonTab2.Panels.Add(this.ribbonPanel5);
-            this.ribbonTab2.Text = "Books and Authors";
+            this.ribbonTab2.Panels.Add(this.ribbonPanel6);
+            this.ribbonTab2.Text = "Data";
             // 
             // ribbonPanel2
             // 
@@ -210,18 +218,17 @@
             this.findPublisherRibbonButton.Text = "Find";
             this.findPublisherRibbonButton.Click += new System.EventHandler(this.findPublisherRibbonButton_Click);
             // 
-            // ribbonTab3
+            // ribbonTab4
             // 
-            this.ribbonTab3.Name = "ribbonTab3";
-            this.ribbonTab3.Panels.Add(this.ribbonPanel4);
-            this.ribbonTab3.Text = "Members";
+            this.ribbonTab4.Name = "ribbonTab4";
+            this.ribbonTab4.Text = "Reports";
             // 
-            // ribbonPanel4
+            // ribbonPanel6
             // 
-            this.ribbonPanel4.Items.Add(this.addMemberRibbonButton);
-            this.ribbonPanel4.Items.Add(this.findMemberRibbonButton);
-            this.ribbonPanel4.Name = "ribbonPanel4";
-            this.ribbonPanel4.Text = "Members";
+            this.ribbonPanel6.Items.Add(this.addMemberRibbonButton);
+            this.ribbonPanel6.Items.Add(this.findMemberRibbonButton);
+            this.ribbonPanel6.Name = "ribbonPanel6";
+            this.ribbonPanel6.Text = "Members";
             // 
             // addMemberRibbonButton
             // 
@@ -240,13 +247,12 @@
             this.findMemberRibbonButton.MinimumSize = new System.Drawing.Size(64, 0);
             this.findMemberRibbonButton.Name = "findMemberRibbonButton";
             this.findMemberRibbonButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("findMemberRibbonButton.SmallImage")));
-            this.findMemberRibbonButton.Text = "Find Member";
+            this.findMemberRibbonButton.Text = "Find";
             this.findMemberRibbonButton.Click += new System.EventHandler(this.findMemberRibbonButton_Click);
             // 
-            // ribbonTab4
+            // ribbonSeparator1
             // 
-            this.ribbonTab4.Name = "ribbonTab4";
-            this.ribbonTab4.Text = "Reports";
+            this.ribbonSeparator1.Name = "ribbonSeparator1";
             // 
             // MainForm
             // 
@@ -271,11 +277,7 @@
         private System.Windows.Forms.RibbonTab ribbonTab2;
         private System.Windows.Forms.RibbonPanel ribbonPanel2;
         private System.Windows.Forms.RibbonPanel ribbonPanel3;
-        private System.Windows.Forms.RibbonTab ribbonTab3;
         private System.Windows.Forms.RibbonTab ribbonTab4;
-        private System.Windows.Forms.RibbonPanel ribbonPanel4;
-        private System.Windows.Forms.RibbonButton addMemberRibbonButton;
-        private System.Windows.Forms.RibbonButton findMemberRibbonButton;
         private System.Windows.Forms.RibbonButton addBookRibbonButton;
         private System.Windows.Forms.RibbonButton findBookRibbonButton;
         private System.Windows.Forms.RibbonButton addAuthorRibbonButton;
@@ -286,5 +288,9 @@
         private System.Windows.Forms.RibbonButton InquiryRibbonButton;
         private System.Windows.Forms.RibbonButton loanRibbonButton;
         private System.Windows.Forms.RibbonButton returnRibbonButton;
+        private System.Windows.Forms.RibbonPanel ribbonPanel6;
+        private System.Windows.Forms.RibbonButton addMemberRibbonButton;
+        private System.Windows.Forms.RibbonButton findMemberRibbonButton;
+        private System.Windows.Forms.RibbonSeparator ribbonSeparator1;
     }
 }

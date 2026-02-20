@@ -35,15 +35,21 @@
             // 
             // bookDataGridView
             // 
+            this.bookDataGridView.AllowUserToAddRows = false;
+            this.bookDataGridView.AllowUserToDeleteRows = false;
+            this.bookDataGridView.AllowUserToOrderColumns = true;
+            this.bookDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.bookDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.bookDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bookDataGridView.Location = new System.Drawing.Point(0, 45);
             this.bookDataGridView.Name = "bookDataGridView";
+            this.bookDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.bookDataGridView.Size = new System.Drawing.Size(800, 405);
             this.bookDataGridView.TabIndex = 3;
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(71)))), ((int)(((byte)(71)))));
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";

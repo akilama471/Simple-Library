@@ -15,5 +15,6 @@ namespace SarasaviLibrary.Models
         
         public string CopyNumber { get; set; }
         public bool IsAvailable { get; set; }
+        public bool IsReferenceOnly { get; set; }
     }
 }
