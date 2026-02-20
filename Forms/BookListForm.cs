@@ -16,50 +16,120 @@ namespace SarasaviLibrary.Forms
         public BookListForm()
         {
             InitializeComponent();
+            searchBookButton.Click += SearchBookButton_Click;
         }
 
-        private void LoadBooks()
+        private async Task LoadFilterDataAsync()
         {
-            BookRepository repo = new BookRepository();
-            // Now fetching COPIES, not just Books
-            List<SarasaviLibrary.Models.Copy> copies = repo.GetAllCopies();
-            
-            // We might need a flat view model, but for now specific columns bindings should work 
-            // if we manually map or if the grid supports nested properties (it usually doesn't strictly support "Book.Title" without work).
-            // To be safe and quick, let's shape the data or hide columns.
-            // Actually, standard DataGridView doesn't support "Book.Title" data property directly.
-            // We need a projection or a flattened list.
-            
-            var displayList = copies.Select(c => new 
+            try
             {
-                c.CopyId,
-                c.CopyNumber,
-                Title = c.Book.Title,
-                Author = c.Book.Author.Name,
-                Publisher = c.Book.Publisher.Name,
-                ISBN = c.Book.ISBN,
-                Edition = c.Book.Edition,
-                IsReferenceOnly = c.IsReferenceOnly ? "Yes" : "No",
-                Status = c.IsAvailable ? "Available" : "Borrowed"
-            }).ToList();
+                if (this.MdiParent is MainForm main)
+                {
+                    main.ShowLoadingProgress(true);
+                }
 
-            bookDataGridView.DataSource = displayList;
+                // Run db queries on a background thread
+                var data = await Task.Run(() =>
+                {
+                    BookRepository bookRepo = new BookRepository();
+                    AuthorRepository authorRepo = new AuthorRepository();
+                    PublisherRepository publisherRepo = new PublisherRepository();
+                    
+                    return new 
+                    {
+                        Copies = bookRepo.SearchBooks(null, null, null, null), // Initial load
+                        Books = bookRepo.GetAll(),
+                        Authors = authorRepo.GetAll(),
+                        Publishers = publisherRepo.GetAll()
+                    };
+                });
 
-            // Configure columns
-            if (bookDataGridView.Columns["CopyId"] != null)
-                bookDataGridView.Columns["CopyId"].Visible = false;
+                // Bind Book Name ComboBox
+                var booksList = data.Books.Select(b => b.Title).Distinct().ToList();
+                booksList.Insert(0, "-- All Books --");
+                searchBookNameInput.DataSource = booksList;
 
-            // Ensure headers are nice
-            if (bookDataGridView.Columns["CopyNumber"] != null)
-                bookDataGridView.Columns["CopyNumber"].HeaderText = "Copy Number";
+                // Bind Author ComboBox
+                var authorsList = data.Authors.ToList();
+                authorsList.Insert(0, new Models.Author { AuthorId = 0, Name = "-- All Authors --" });
+                searchBookAuthorInput.DataSource = authorsList;
+                searchBookAuthorInput.DisplayMember = "Name";
+                searchBookAuthorInput.ValueMember = "AuthorId";
+                searchBookAuthorInput.SelectedIndex = 0;
 
-            if (bookDataGridView.Columns["IsReferenceOnly"] != null)
-                bookDataGridView.Columns["IsReferenceOnly"].HeaderText = "Reference Only";
+                // Bind Publisher ComboBox
+                var publishersList = data.Publishers.ToList();
+                publishersList.Insert(0, new Models.Publisher { PublisherId = 0, Name = "-- All Publishers --" });
+                searchBookPublisherInput.DataSource = publishersList;
+                searchBookPublisherInput.DisplayMember = "Name";
+                searchBookPublisherInput.ValueMember = "PublisherId";
+                searchBookPublisherInput.SelectedIndex = 0;
+
+                // Bind Grid
+                BindGridData(data.Copies);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading data: {ex.Message}", "Error");
+            }
+            finally
+            {
+                if (this.MdiParent is MainForm main)
+                {
+                    main.ShowLoadingProgress(false);
+                }
+            }
         }
 
-        private void BookListForm_Load(object sender, EventArgs e)
+        private async void SearchBookButton_Click(object sender, EventArgs e)
         {
-            LoadBooks();
+            string number = searchBookNumberInput.Text.Trim();
+            string name = searchBookNameInput.Text.Trim();
+            int? authorId = searchBookAuthorInput.SelectedValue as int?;
+            int? publisherId = searchBookPublisherInput.SelectedValue as int?;
+
+            // Reset IDs if the user selected the "-- All --" default options
+            if (authorId == 0) authorId = null;
+            if (publisherId == 0) publisherId = null;
+
+            try
+            {
+                if (this.MdiParent is MainForm main)
+                {
+                    main.ShowLoadingProgress(true);
+                }
+
+                BookRepository repo = new BookRepository();
+                DataTable results = await Task.Run(() => repo.SearchBooks(number, name, authorId, publisherId));
+                
+                BindGridData(results);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Search failed: {ex.Message}", "Error");
+            }
+            finally
+            {
+                if (this.MdiParent is MainForm main)
+                {
+                    main.ShowLoadingProgress(false);
+                }
+            }
+        }
+
+        private void BindGridData(DataTable data)
+        {
+            bookDataGridView.DataSource = data;
+            
+            if (bookDataGridView.Columns.Count > 0)
+            {
+                bookDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+        }
+
+        private async void BookListForm_Load(object sender, EventArgs e)
+        {
+            await LoadFilterDataAsync();
         }
     }
 }

@@ -9,6 +9,8 @@ namespace SarasaviLibrary.Models
     public class Member : User
     {
         public int MemberId { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
         
         // Navigation property for loans
         public List<Loan> Loans { get; set; } = new List<Loan>();

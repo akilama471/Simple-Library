@@ -207,9 +207,8 @@ namespace SarasaviLibrary.Data
              return copies;
         }
 
-        public DataTable SearchBooks(string searchText, string searchType)
+        public DataTable SearchBooks(string copyNumber, string title, int? authorId, int? publisherId)
         {
-            // Search logic. Returning DataTable for easier binding to Grid with counts
             string query = @"
                 SELECT 
                     cp.CopyNumber as [Copy Number], 
@@ -219,7 +218,61 @@ namespace SarasaviLibrary.Data
                     b.Edition,
                     b.ISBN,
                     CASE WHEN cp.IsReferenceOnly = 1 THEN 'Yes' ELSE 'No' END as [Reference Only],
-                    CASE WHEN cp.IsAvailable = 1 THEN 'Available' ELSE 'Borrowed' END as Status
+                    CASE WHEN cp.IsAvailable = 1 THEN 'Available' ELSE 'Borrowed' END as Status,
+                    b.CreatedAt as [Created At],
+                    b.UpdatedAt as [Updated At]
+                FROM Copies cp
+                JOIN Books b ON cp.BookId = b.BookId
+                JOIN Authors a ON b.AuthorId = a.AuthorId
+                JOIN Publishers p ON b.PublisherId = p.PublisherId
+                WHERE 1=1 ";
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            if (!string.IsNullOrWhiteSpace(copyNumber))
+            {
+                query += " AND cp.CopyNumber LIKE @CopyNumber";
+                parameters.Add(new SqlParameter("@CopyNumber", "%" + copyNumber + "%"));
+            }
+
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                query += " AND b.Title LIKE @Title";
+                parameters.Add(new SqlParameter("@Title", "%" + title + "%"));
+            }
+
+            if (authorId.HasValue && authorId.Value > 0)
+            {
+                query += " AND b.AuthorId = @AuthorId";
+                parameters.Add(new SqlParameter("@AuthorId", authorId.Value));
+            }
+
+            if (publisherId.HasValue && publisherId.Value > 0)
+            {
+                query += " AND b.PublisherId = @PublisherId";
+                parameters.Add(new SqlParameter("@PublisherId", publisherId.Value));
+            }
+            
+            query += " ORDER BY b.Title, cp.CopyNumber";
+
+            return DatabaseHelper.ExecuteQuery(query, parameters.ToArray());
+        }
+
+        public DataTable SearchBooks(string searchText, string searchType)
+        {
+            // Old search logic preserved for InquiryForm
+            string query = @"
+                SELECT 
+                    cp.CopyNumber as [Copy Number], 
+                    b.Title, 
+                    a.Name as Author, 
+                    p.Name as Publisher, 
+                    b.Edition,
+                    b.ISBN,
+                    CASE WHEN cp.IsReferenceOnly = 1 THEN 'Yes' ELSE 'No' END as [Reference Only],
+                    CASE WHEN cp.IsAvailable = 1 THEN 'Available' ELSE 'Borrowed' END as Status,
+                    b.CreatedAt as [Created At],
+                    b.UpdatedAt as [Updated At]
                 FROM Copies cp
                 JOIN Books b ON cp.BookId = b.BookId
                 JOIN Authors a ON b.AuthorId = a.AuthorId
@@ -247,11 +300,11 @@ namespace SarasaviLibrary.Data
                 }
             }
             
-            // Order by Title and CopyNumber instead of group by
             query += " ORDER BY b.Title, cp.CopyNumber";
 
             return DatabaseHelper.ExecuteQuery(query, parameters.ToArray());
         }
+
         public Copy GetCopyByNumber(string copyNumber)
         {
             string query = @"SELECT c.CopyId, c.IsAvailable, c.IsReferenceOnly, b.BookId, b.IsReferenceOnly as BookRefOnly

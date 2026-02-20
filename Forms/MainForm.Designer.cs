@@ -52,6 +52,9 @@
             this.ribbonTab4 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel4 = new System.Windows.Forms.RibbonPanel();
             this.borrowBookHistoryRibbonButton = new System.Windows.Forms.RibbonButton();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.LoadingProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ribbon1
@@ -273,18 +276,38 @@
             this.borrowBookHistoryRibbonButton.Text = "Borrow History";
             this.borrowBookHistoryRibbonButton.Click += new System.EventHandler(this.borrowBookHistoryRibbonButton_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.LoadingProgressBar});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // LoadingProgressBar
+            // 
+            this.LoadingProgressBar.Name = "LoadingProgressBar";
+            this.LoadingProgressBar.Size = new System.Drawing.Size(100, 16);
+            this.LoadingProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.ribbon1);
             this.IsMdiContainer = true;
             this.KeyPreview = true;
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -313,5 +336,7 @@
         private System.Windows.Forms.RibbonSeparator ribbonSeparator1;
         private System.Windows.Forms.RibbonPanel ribbonPanel4;
         private System.Windows.Forms.RibbonButton borrowBookHistoryRibbonButton;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripProgressBar LoadingProgressBar;
     }
 }

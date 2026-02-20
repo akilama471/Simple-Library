@@ -16,6 +16,19 @@ namespace SarasaviLibrary.Forms
         {
             InitializeComponent();
             InitializeMenu();
+            LoadingProgressBar.Visible = false;
+        }
+
+        public void ShowLoadingProgress(bool isVisible)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => LoadingProgressBar.Visible = isVisible));
+            }
+            else
+            {
+                LoadingProgressBar.Visible = isVisible;
+            }
         }
 
         private void InitializeMenu(){}

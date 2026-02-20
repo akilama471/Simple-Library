@@ -122,7 +122,7 @@ namespace SarasaviLibrary.Data
             ";
             DatabaseHelper.ExecuteNonQuery(checkCopyColumnQuery);
 
-            // Attempt to add UNIQUE constraint to ISBN if it doesn't exist (and hoping no duplicate NULLs or values)
+             // Attempt to add UNIQUE constraint to ISBN if it doesn't exist (and hoping no duplicate NULLs or values)
             try 
             {
                  string addUniqueISBN = @"
@@ -142,6 +142,41 @@ namespace SarasaviLibrary.Data
             { 
                // Ignore if it fails due to existing data - user will need to fix data.
             }
+
+            // Migration: Add Timestamps to all primary tables
+            string addTimestampsQuery = @"
+                DECLARE @Tables TABLE (TableName NVARCHAR(100));
+                INSERT INTO @Tables VALUES ('Books'), ('Copies'), ('Authors'), ('Publishers'), ('Members');
+
+                DECLARE @CurrentTable NVARCHAR(100);
+                DECLARE TableCursor CURSOR FOR SELECT TableName FROM @Tables;
+
+                OPEN TableCursor;
+                FETCH NEXT FROM TableCursor INTO @CurrentTable;
+
+                WHILE @@FETCH_STATUS = 0
+                BEGIN
+                    DECLARE @Sql NVARCHAR(MAX);
+                    
+                    IF NOT EXISTS (SELECT * FROM sys.columns WHERE Name = N'CreatedAt' AND Object_ID = Object_ID(@CurrentTable))
+                    BEGIN
+                        SET @Sql = 'ALTER TABLE ' + QUOTENAME(@CurrentTable) + ' ADD CreatedAt DATETIME DEFAULT GETDATE() NOT NULL CONSTRAINT DF_' + @CurrentTable + '_CreatedAt DEFAULT GETDATE()';
+                        EXEC sp_executesql @Sql;
+                    END
+                    
+                    IF NOT EXISTS (SELECT * FROM sys.columns WHERE Name = N'UpdatedAt' AND Object_ID = Object_ID(@CurrentTable))
+                    BEGIN
+                        SET @Sql = 'ALTER TABLE ' + QUOTENAME(@CurrentTable) + ' ADD UpdatedAt DATETIME DEFAULT GETDATE() NOT NULL CONSTRAINT DF_' + @CurrentTable + '_UpdatedAt DEFAULT GETDATE()';
+                        EXEC sp_executesql @Sql;
+                    END
+
+                    FETCH NEXT FROM TableCursor INTO @CurrentTable;
+                END;
+
+                CLOSE TableCursor;
+                DEALLOCATE TableCursor;
+            ";
+            DatabaseHelper.ExecuteNonQuery(addTimestampsQuery);
         }
     }
 }

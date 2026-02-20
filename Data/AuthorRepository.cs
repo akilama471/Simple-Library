@@ -23,7 +23,14 @@ namespace SarasaviLibrary.Data
         public List<Author> GetAll()
         {
             List<Author> authors = new List<Author>();
-            string query = "SELECT * FROM Authors";
+            string query = @"
+                SELECT 
+                    a.AuthorId, 
+                    a.Name,
+                    a.CreatedAt,
+                    a.UpdatedAt,
+                    (SELECT COUNT(*) FROM Books b WHERE b.AuthorId = a.AuthorId) AS BookCount 
+                FROM Authors a";
             DataTable dt = DatabaseHelper.ExecuteQuery(query);
 
             foreach (DataRow row in dt.Rows)
@@ -31,7 +38,10 @@ namespace SarasaviLibrary.Data
                 authors.Add(new Author
                 {
                     AuthorId = Convert.ToInt32(row["AuthorId"]),
-                    Name = row["Name"].ToString()
+                    Name = row["Name"].ToString(),
+                    BookCount = Convert.ToInt32(row["BookCount"]),
+                    CreatedAt = row["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(row["CreatedAt"]) : DateTime.MinValue,
+                    UpdatedAt = row["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(row["UpdatedAt"]) : DateTime.MinValue
                 });
             }
 
@@ -40,7 +50,15 @@ namespace SarasaviLibrary.Data
 
         public Author GetById(int id)
         {
-            string query = "SELECT * FROM Authors WHERE AuthorId = @Id";
+            string query = @"
+                SELECT 
+                    a.AuthorId, 
+                    a.Name,
+                    a.CreatedAt,
+                    a.UpdatedAt,
+                    (SELECT COUNT(*) FROM Books b WHERE b.AuthorId = a.AuthorId) AS BookCount 
+                FROM Authors a 
+                WHERE a.AuthorId = @Id";
             SqlParameter[] parameters = {
                 new SqlParameter("@Id", id)
             };
@@ -52,7 +70,10 @@ namespace SarasaviLibrary.Data
                 return new Author
                 {
                     AuthorId = Convert.ToInt32(row["AuthorId"]),
-                    Name = row["Name"].ToString()
+                    Name = row["Name"].ToString(),
+                    BookCount = Convert.ToInt32(row["BookCount"]),
+                    CreatedAt = row["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(row["CreatedAt"]) : DateTime.MinValue,
+                    UpdatedAt = row["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(row["UpdatedAt"]) : DateTime.MinValue
                 };
             }
 

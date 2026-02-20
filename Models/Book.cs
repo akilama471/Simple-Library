@@ -9,6 +9,8 @@ namespace SarasaviLibrary.Models
     public class Book
     {
         public int BookId { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
         
         // This can be used for display or legacy purposes, but ID is primary
         public string BookNumber { get; set; } 

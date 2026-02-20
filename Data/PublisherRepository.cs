@@ -23,7 +23,14 @@ namespace SarasaviLibrary.Data
         public List<Publisher> GetAll()
         {
             List<Publisher> publishers = new List<Publisher>();
-            string query = "SELECT * FROM Publishers";
+            string query = @"
+                SELECT 
+                    p.PublisherId, 
+                    p.Name,
+                    p.CreatedAt,
+                    p.UpdatedAt,
+                    (SELECT COUNT(*) FROM Books b WHERE b.PublisherId = p.PublisherId) AS BookCount 
+                FROM Publishers p";
             DataTable dt = DatabaseHelper.ExecuteQuery(query);
 
             foreach (DataRow row in dt.Rows)
@@ -31,7 +38,10 @@ namespace SarasaviLibrary.Data
                 publishers.Add(new Publisher
                 {
                     PublisherId = Convert.ToInt32(row["PublisherId"]),
-                    Name = row["Name"].ToString()
+                    Name = row["Name"].ToString(),
+                    BookCount = Convert.ToInt32(row["BookCount"]),
+                    CreatedAt = row["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(row["CreatedAt"]) : DateTime.MinValue,
+                    UpdatedAt = row["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(row["UpdatedAt"]) : DateTime.MinValue
                 });
             }
 
@@ -40,7 +50,15 @@ namespace SarasaviLibrary.Data
 
         public Publisher GetById(int id)
         {
-            string query = "SELECT * FROM Publishers WHERE PublisherId = @Id";
+            string query = @"
+                SELECT 
+                    p.PublisherId, 
+                    p.Name,
+                    p.CreatedAt,
+                    p.UpdatedAt,
+                    (SELECT COUNT(*) FROM Books b WHERE b.PublisherId = p.PublisherId) AS BookCount 
+                FROM Publishers p 
+                WHERE p.PublisherId = @Id";
             SqlParameter[] parameters = {
                 new SqlParameter("@Id", id)
             };
@@ -52,7 +70,10 @@ namespace SarasaviLibrary.Data
                 return new Publisher
                 {
                     PublisherId = Convert.ToInt32(row["PublisherId"]),
-                    Name = row["Name"].ToString()
+                    Name = row["Name"].ToString(),
+                    BookCount = Convert.ToInt32(row["BookCount"]),
+                    CreatedAt = row["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(row["CreatedAt"]) : DateTime.MinValue,
+                    UpdatedAt = row["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(row["UpdatedAt"]) : DateTime.MinValue
                 };
             }
 

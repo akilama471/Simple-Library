@@ -27,7 +27,7 @@ namespace SarasaviLibrary.Data
 
         public void Update(Member member)
         {
-            string query = "UPDATE Members SET Name = @Name, NIC = @NIC, Address = @Address, Sex = @Sex WHERE MemberId = @MemberId";
+            string query = "UPDATE Members SET Name = @Name, NIC = @NIC, Address = @Address, Sex = @Sex, UpdatedAt = GETDATE() WHERE MemberId = @MemberId";
             SqlParameter[] parameters = {
                 new SqlParameter("@Name", member.Name),
                 new SqlParameter("@NIC", member.NIC),
@@ -97,7 +97,9 @@ namespace SarasaviLibrary.Data
                     NIC = row["NIC"].ToString(),
                     Address = row["Address"].ToString(),
                     Sex = row["Sex"].ToString(),
-                    UserNumber = row["UserNumber"] != DBNull.Value ? row["UserNumber"].ToString() : string.Empty
+                    UserNumber = row["UserNumber"] != DBNull.Value ? row["UserNumber"].ToString() : string.Empty,
+                    CreatedAt = row["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(row["CreatedAt"]) : DateTime.MinValue,
+                    UpdatedAt = row["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(row["UpdatedAt"]) : DateTime.MinValue
                 });
             }
 
@@ -122,7 +124,9 @@ namespace SarasaviLibrary.Data
                     NIC = row["NIC"].ToString(),
                     Address = row["Address"].ToString(),
                     Sex = row["Sex"].ToString(),
-                    UserNumber = row["UserNumber"] != DBNull.Value ? row["UserNumber"].ToString() : string.Empty
+                    UserNumber = row["UserNumber"] != DBNull.Value ? row["UserNumber"].ToString() : string.Empty,
+                    CreatedAt = row["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(row["CreatedAt"]) : DateTime.MinValue,
+                    UpdatedAt = row["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(row["UpdatedAt"]) : DateTime.MinValue
                 };
             }
 
@@ -147,7 +151,9 @@ namespace SarasaviLibrary.Data
                     NIC = row["NIC"].ToString(),
                     Address = row["Address"].ToString(),
                     Sex = row["Sex"].ToString(),
-                    UserNumber = row["UserNumber"] != DBNull.Value ? row["UserNumber"].ToString() : string.Empty
+                    UserNumber = row["UserNumber"] != DBNull.Value ? row["UserNumber"].ToString() : string.Empty,
+                    CreatedAt = row["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(row["CreatedAt"]) : DateTime.MinValue,
+                    UpdatedAt = row["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(row["UpdatedAt"]) : DateTime.MinValue
                 };
             }
 
