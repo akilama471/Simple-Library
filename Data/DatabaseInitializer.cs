@@ -160,13 +160,13 @@ namespace SarasaviLibrary.Data
                     
                     IF NOT EXISTS (SELECT * FROM sys.columns WHERE Name = N'CreatedAt' AND Object_ID = Object_ID(@CurrentTable))
                     BEGIN
-                        SET @Sql = 'ALTER TABLE ' + QUOTENAME(@CurrentTable) + ' ADD CreatedAt DATETIME DEFAULT GETDATE() NOT NULL CONSTRAINT DF_' + @CurrentTable + '_CreatedAt DEFAULT GETDATE()';
+                        SET @Sql = 'ALTER TABLE ' + QUOTENAME(@CurrentTable) + ' ADD CreatedAt DATETIME NOT NULL CONSTRAINT DF_' + @CurrentTable + '_CreatedAt DEFAULT GETDATE()';
                         EXEC sp_executesql @Sql;
                     END
                     
                     IF NOT EXISTS (SELECT * FROM sys.columns WHERE Name = N'UpdatedAt' AND Object_ID = Object_ID(@CurrentTable))
                     BEGIN
-                        SET @Sql = 'ALTER TABLE ' + QUOTENAME(@CurrentTable) + ' ADD UpdatedAt DATETIME DEFAULT GETDATE() NOT NULL CONSTRAINT DF_' + @CurrentTable + '_UpdatedAt DEFAULT GETDATE()';
+                        SET @Sql = 'ALTER TABLE ' + QUOTENAME(@CurrentTable) + ' ADD UpdatedAt DATETIME NOT NULL CONSTRAINT DF_' + @CurrentTable + '_UpdatedAt DEFAULT GETDATE()';
                         EXEC sp_executesql @Sql;
                     END
 
