@@ -117,5 +117,60 @@ namespace SarasaviLibrary.Data
             }
             return null;
         }
+
+        // Reports
+
+        public DataTable GetBorrowHistoryReport(bool activeOnly, bool delayedOnly)
+        {
+            string query = @"SELECT 
+                                c.CopyNumber as [Copy Number], 
+                                b.Title, 
+                                m.Name as [Member Name], 
+                                l.LoanDate as [Loan Date], 
+                                l.DueDate as [Due Date],
+                                CASE 
+                                    WHEN l.IsReturned = 1 THEN 'Returned' 
+                                    WHEN l.IsReturned = 0 AND l.DueDate < GETDATE() THEN 'Delay Return'
+                                    ELSE 'Borrowed' 
+                                END as [Status]
+                             FROM Loans l
+                             JOIN Copies c ON l.CopyId = c.CopyId
+                             JOIN Books b ON c.BookId = b.BookId
+                             JOIN Members m ON l.MemberId = m.MemberId
+                             WHERE 1=1 ";
+
+            if (activeOnly)
+            {
+                query += " AND l.IsReturned = 0 ";
+            }
+            if (delayedOnly)
+            {
+                query += " AND l.IsReturned = 0 AND l.DueDate < GETDATE() ";
+            }
+
+            query += " ORDER BY l.LoanDate DESC";
+            return DatabaseHelper.ExecuteQuery(query);
+        }
+
+        public DataTable GetMemberHistoryReport(int memberId)
+        {
+            string query = @"SELECT 
+                                c.CopyNumber as [Copy Number], 
+                                b.Title, 
+                                l.LoanDate as [Loan Date], 
+                                l.DueDate as [Due Date],
+                                CASE 
+                                    WHEN l.IsReturned = 1 THEN 'Returned' 
+                                    WHEN l.IsReturned = 0 AND l.DueDate < GETDATE() THEN 'Delay Return'
+                                    ELSE 'Borrowed' 
+                                END as [Status]
+                             FROM Loans l
+                             JOIN Copies c ON l.CopyId = c.CopyId
+                             JOIN Books b ON c.BookId = b.BookId
+                             WHERE l.MemberId = @MemberId
+                             ORDER BY l.LoanDate DESC";
+            SqlParameter[] param = { new SqlParameter("@MemberId", memberId) };
+            return DatabaseHelper.ExecuteQuery(query, param);
+        }
     }
 }

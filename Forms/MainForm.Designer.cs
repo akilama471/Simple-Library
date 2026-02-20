@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.ribbon1 = new System.Windows.Forms.Ribbon();
+            this.ribbonSeparator1 = new System.Windows.Forms.RibbonSeparator();
             this.ribbonTab1 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
             this.InquiryRibbonButton = new System.Windows.Forms.RibbonButton();
@@ -45,11 +46,12 @@
             this.ribbonPanel5 = new System.Windows.Forms.RibbonPanel();
             this.addPublisherRibbonButton = new System.Windows.Forms.RibbonButton();
             this.findPublisherRibbonButton = new System.Windows.Forms.RibbonButton();
-            this.ribbonTab4 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel6 = new System.Windows.Forms.RibbonPanel();
             this.addMemberRibbonButton = new System.Windows.Forms.RibbonButton();
             this.findMemberRibbonButton = new System.Windows.Forms.RibbonButton();
-            this.ribbonSeparator1 = new System.Windows.Forms.RibbonSeparator();
+            this.ribbonTab4 = new System.Windows.Forms.RibbonTab();
+            this.ribbonPanel4 = new System.Windows.Forms.RibbonPanel();
+            this.borrowBookHistoryRibbonButton = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
             // ribbon1
@@ -82,6 +84,10 @@
             this.ribbon1.TabSpacing = 4;
             this.ribbon1.Text = "ribbon1";
             this.ribbon1.ThemeColor = System.Windows.Forms.RibbonTheme.JellyBelly;
+            // 
+            // ribbonSeparator1
+            // 
+            this.ribbonSeparator1.Name = "ribbonSeparator1";
             // 
             // ribbonTab1
             // 
@@ -218,11 +224,6 @@
             this.findPublisherRibbonButton.Text = "Find";
             this.findPublisherRibbonButton.Click += new System.EventHandler(this.findPublisherRibbonButton_Click);
             // 
-            // ribbonTab4
-            // 
-            this.ribbonTab4.Name = "ribbonTab4";
-            this.ribbonTab4.Text = "Reports";
-            // 
             // ribbonPanel6
             // 
             this.ribbonPanel6.Items.Add(this.addMemberRibbonButton);
@@ -250,9 +251,27 @@
             this.findMemberRibbonButton.Text = "Find";
             this.findMemberRibbonButton.Click += new System.EventHandler(this.findMemberRibbonButton_Click);
             // 
-            // ribbonSeparator1
+            // ribbonTab4
             // 
-            this.ribbonSeparator1.Name = "ribbonSeparator1";
+            this.ribbonTab4.Name = "ribbonTab4";
+            this.ribbonTab4.Panels.Add(this.ribbonPanel4);
+            this.ribbonTab4.Text = "Reports";
+            // 
+            // ribbonPanel4
+            // 
+            this.ribbonPanel4.Items.Add(this.borrowBookHistoryRibbonButton);
+            this.ribbonPanel4.Name = "ribbonPanel4";
+            this.ribbonPanel4.Text = "Reports";
+            // 
+            // borrowBookHistoryRibbonButton
+            // 
+            this.borrowBookHistoryRibbonButton.Image = ((System.Drawing.Image)(resources.GetObject("borrowBookHistoryRibbonButton.Image")));
+            this.borrowBookHistoryRibbonButton.LargeImage = ((System.Drawing.Image)(resources.GetObject("borrowBookHistoryRibbonButton.LargeImage")));
+            this.borrowBookHistoryRibbonButton.MinimumSize = new System.Drawing.Size(128, 0);
+            this.borrowBookHistoryRibbonButton.Name = "borrowBookHistoryRibbonButton";
+            this.borrowBookHistoryRibbonButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("borrowBookHistoryRibbonButton.SmallImage")));
+            this.borrowBookHistoryRibbonButton.Text = "Borrow History";
+            this.borrowBookHistoryRibbonButton.Click += new System.EventHandler(this.borrowBookHistoryRibbonButton_Click);
             // 
             // MainForm
             // 
@@ -292,5 +311,7 @@
         private System.Windows.Forms.RibbonButton addMemberRibbonButton;
         private System.Windows.Forms.RibbonButton findMemberRibbonButton;
         private System.Windows.Forms.RibbonSeparator ribbonSeparator1;
+        private System.Windows.Forms.RibbonPanel ribbonPanel4;
+        private System.Windows.Forms.RibbonButton borrowBookHistoryRibbonButton;
     }
 }

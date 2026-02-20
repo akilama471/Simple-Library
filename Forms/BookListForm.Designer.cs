@@ -45,10 +45,11 @@
             this.bookDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.bookDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.bookDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bookDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.bookDataGridView.Location = new System.Drawing.Point(0, 50);
             this.bookDataGridView.Name = "bookDataGridView";
+            this.bookDataGridView.ReadOnly = true;
             this.bookDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.bookDataGridView.Size = new System.Drawing.Size(800, 450);
+            this.bookDataGridView.Size = new System.Drawing.Size(800, 400);
             this.bookDataGridView.TabIndex = 3;
             // 
             // panel1
@@ -60,13 +61,13 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 46);
+            this.panel1.Size = new System.Drawing.Size(800, 50);
             this.panel1.TabIndex = 4;
             // 
             // openAddBookButton
             // 
             this.openAddBookButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.openAddBookButton.Location = new System.Drawing.Point(5, 5);
+            this.openAddBookButton.Location = new System.Drawing.Point(607, 6);
             this.openAddBookButton.Name = "openAddBookButton";
             this.openAddBookButton.Size = new System.Drawing.Size(60, 36);
             this.openAddBookButton.TabIndex = 8;
@@ -100,8 +101,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.bookDataGridView);
+            this.Controls.Add(this.panel1);
             this.Name = "BookListForm";
             this.Text = "BookListForm";
             this.Load += new System.EventHandler(this.BookListForm_Load);
