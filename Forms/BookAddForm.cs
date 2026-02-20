@@ -18,11 +18,8 @@ namespace SarasaviLibrary.Forms
         {
             InitializeComponent();
             LoadMetadata();
-            // Disable Book Number input as it is auto-generated
             materialSingleLineTextField1.Enabled = false;
             materialSingleLineTextField1.Text = "Auto-Generated";
-            button2.Click += AddButton_Click;
-            button1.Click += CancelButton_Click;
         }
 
         private void LoadMetadata()
@@ -51,10 +48,10 @@ namespace SarasaviLibrary.Forms
             }
         }
 
-        private void AddButton_Click(object sender, EventArgs e)
+        private void addBook()
         {
-            if (string.IsNullOrWhiteSpace(materialSingleLineTextField2.Text) ||
-                string.IsNullOrWhiteSpace(isbnTextField.Text) || // ISBN Check
+            if (string.IsNullOrWhiteSpace(bookNameInputField.Text) ||
+                string.IsNullOrWhiteSpace(bookISBNInputField.Text) || // ISBN Check
                 comboBox1.SelectedItem == null ||
                 comboBox2.SelectedItem == null)
             {
@@ -66,35 +63,27 @@ namespace SarasaviLibrary.Forms
             {
                 Book book = new Book
                 {
-                    // BookNumber is auto-generated in Repository
-                    Title = materialSingleLineTextField2.Text,
+                     // BookNumber is auto-generated in Repository
+                    Title = bookNameInputField.Text,
                     AuthorId = (int)comboBox1.SelectedValue,
                     PublisherId = (int)comboBox2.SelectedValue,
-                    Classification = materialSingleLineTextField3.Text, 
-                    ISBN = isbnTextField.Text,
-                    Edition = editionTextField.Text,
+                    Classification = bookClassificationInputField.Text,
+                    ISBN = bookISBNInputField.Text,
+                    Edition = bookEditionInputField.Text,
                     // Note: IsReferenceOnly on Book is legacy/default, actual check is on Copy
-                    IsReferenceOnly = materialCheckBox1.Checked 
+                    IsReferenceOnly = bookRefferanceInputField.Checked,
+                    Copies = new List<Copy>()
                 };
 
-                // Create copies
-                int copyCount = (int)numericUpDown1.Value;
-                if (copyCount > 10)
+                foreach (DataGridViewRow row in bookCopyGrid.Rows)
                 {
-                    MessageBox.Show("Maximum 10 copies allowed.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (copyCount > 0)
-                {
-                    for (int i = 1; i <= copyCount; i++)
+                    if (row.Cells.Count > 1 && row.Cells[0].Value != null)
                     {
+                        bool isRefOnly = row.Cells[1].Value != null && Convert.ToBoolean(row.Cells[1].Value);
                         book.Copies.Add(new Copy
                         {
-                            // CopyNumber prefix will be updated in Repository
-                            CopyNumber = $"TEMP-{i}",
                             IsAvailable = true,
-                            IsReferenceOnly = materialCheckBox1.Checked // Apply checkbox to initial copies
+                            IsReferenceOnly = isRefOnly
                         });
                     }
                 }
@@ -110,14 +99,14 @@ namespace SarasaviLibrary.Forms
                 // Check for Unique Constraint Violation (Error 2627 or 2601)
                 if (ex.Number == 2627 || ex.Number == 2601)
                 {
-                     if (ex.Message.Contains("ISBN"))
-                     {
-                         MessageBox.Show("A book with this ISBN already exists. ISBN must be unique.", "Duplicate ISBN", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                     }
-                     else
-                     {
-                         MessageBox.Show("A duplicate record exists.", "Duplicate Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                     }
+                    if (ex.Message.Contains("ISBN"))
+                    {
+                        MessageBox.Show("A book with this ISBN already exists. ISBN must be unique.", "Duplicate ISBN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show("A duplicate record exists.", "Duplicate Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
@@ -133,6 +122,68 @@ namespace SarasaviLibrary.Forms
         private void CancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnAddBookCopyButton_Click(object sender, EventArgs e)
+        {
+
+            // Create copies
+            int copyCount = (int)bookCopyCountInputField.Value;
+            int rowCount = (int)bookCopyGrid.Rows.Count;
+
+            if (copyCount > 10 || rowCount > 10 || copyCount + rowCount > 10)
+            {
+                MessageBox.Show("Maximum 10 copies allowed.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (copyCount > 0)
+            {
+                for (int i = 1; i <= copyCount; i++)
+                {
+                    bookCopyGrid.Rows.Add(rowCount + i,bookRefferanceInputField.Checked);
+                }
+            }
+        }
+
+        private void bookCopyGrid_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            if (bookCopyCountInputField.Value > bookCopyCountInputField.Minimum)
+            {
+                bookCopyCountInputField.Value = bookCopyGrid.Rows.Count;
+            }
+        }
+
+        private void bookRefferanceInputField_CheckedChanged(object sender, EventArgs e)
+        {
+            if (bookRefferanceInputField.Checked)
+            {
+                foreach (DataGridViewRow row in bookCopyGrid.Rows)
+                {
+                    if (row.Cells.Count > 1)
+                    {
+                        row.Cells[1].Value = true;
+                    }
+                }
+            }
+        }
+
+        private void bookCopyGrid_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bookCopyGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 1 && e.RowIndex >= 0)
+            {
+                var val = bookCopyGrid.Rows[e.RowIndex].Cells[1].Value;
+                bool isChecked = val != null && Convert.ToBoolean(val);
+                if (!isChecked)
+                {
+                    bookRefferanceInputField.Checked = false;
+                }
+            }
         }
     }
 }

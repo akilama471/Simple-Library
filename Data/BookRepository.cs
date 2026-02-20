@@ -212,18 +212,18 @@ namespace SarasaviLibrary.Data
             // Search logic. Returning DataTable for easier binding to Grid with counts
             string query = @"
                 SELECT 
+                    cp.CopyNumber as [Copy Number], 
                     b.Title, 
                     a.Name as Author, 
                     p.Name as Publisher, 
-                    b.Classification, 
-                    b.IsReferenceOnly,
-                    (SELECT COUNT(*) FROM Copies c WHERE c.BookId = b.BookId AND c.IsAvailable = 1) as AvailableCopies,
-                    (SELECT COUNT(*) FROM Copies c WHERE c.BookId = b.BookId AND c.IsAvailable = 0) as LoanedCopies,
-                    (SELECT COUNT(*) FROM Reservations r WHERE r.BookId = b.BookId) as ReservationCount
-                FROM Books b
+                    b.Edition,
+                    b.ISBN,
+                    CASE WHEN cp.IsReferenceOnly = 1 THEN 'Yes' ELSE 'No' END as [Reference Only],
+                    CASE WHEN cp.IsAvailable = 1 THEN 'Available' ELSE 'Borrowed' END as Status
+                FROM Copies cp
+                JOIN Books b ON cp.BookId = b.BookId
                 JOIN Authors a ON b.AuthorId = a.AuthorId
                 JOIN Publishers p ON b.PublisherId = p.PublisherId
-                LEFT JOIN Copies cp ON b.BookId = cp.BookId
                 WHERE 1=1 ";
 
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -242,13 +242,13 @@ namespace SarasaviLibrary.Data
                 }
                 else if (searchType == "CopyNumber")
                 {
-                    // For CopyNumber search, we need to join Copies and check
                     query += " AND cp.CopyNumber = @CopyNumber";
                      parameters.Add(new SqlParameter("@CopyNumber", searchText));
                 }
             }
             
-            query += " GROUP BY b.BookId, b.Title, a.Name, p.Name, b.Classification, b.IsReferenceOnly";
+            // Order by Title and CopyNumber instead of group by
+            query += " ORDER BY b.Title, cp.CopyNumber";
 
             return DatabaseHelper.ExecuteQuery(query, parameters.ToArray());
         }
