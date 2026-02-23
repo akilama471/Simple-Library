@@ -105,14 +105,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 404);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(740, 46);
+            this.panel1.Size = new System.Drawing.Size(744, 46);
             this.panel1.TabIndex = 10;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btnCancel.Location = new System.Drawing.Point(519, 5);
+            this.btnCancel.Location = new System.Drawing.Point(523, 5);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(109, 36);
             this.btnCancel.TabIndex = 12;
@@ -123,7 +123,7 @@
             // 
             this.btnLoan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLoan.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btnLoan.Location = new System.Drawing.Point(634, 5);
+            this.btnLoan.Location = new System.Drawing.Point(638, 5);
             this.btnLoan.Name = "btnLoan";
             this.btnLoan.Size = new System.Drawing.Size(100, 36);
             this.btnLoan.TabIndex = 11;
@@ -133,13 +133,16 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(6, 47);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(730, 351);
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(734, 351);
             this.dataGridView1.TabIndex = 11;
             // 
             // btnAddBookToBorrow
@@ -156,7 +159,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(740, 450);
+            this.ClientSize = new System.Drawing.Size(744, 450);
             this.Controls.Add(this.btnAddBookToBorrow);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);

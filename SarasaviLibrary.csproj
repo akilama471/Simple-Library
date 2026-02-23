@@ -63,6 +63,12 @@
     <Compile Include="Data\AuthorRepository.cs" />
     <Compile Include="Data\BookRepository.cs" />
     <Compile Include="Data\DatabaseHelper.cs" />
+    <Compile Include="Forms\ReservationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ReservationForm.Designer.cs">
+      <DependentUpon>ReservationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\DatabaseInitializerService.cs" />
     <Compile Include="Data\LoanRepository.cs" />
     <Compile Include="Data\MemberRepository.cs" />

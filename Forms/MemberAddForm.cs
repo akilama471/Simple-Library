@@ -104,5 +104,10 @@ namespace SarasaviLibrary.Forms
                 MessageBox.Show($"Error processing member: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void dismissMemberFromButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

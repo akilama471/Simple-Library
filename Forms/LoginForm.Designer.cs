@@ -81,6 +81,7 @@
             this.txtPasswordInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtPasswordInput.Location = new System.Drawing.Point(239, 48);
             this.txtPasswordInput.Name = "txtPasswordInput";
+            this.txtPasswordInput.PasswordChar = '*';
             this.txtPasswordInput.Size = new System.Drawing.Size(226, 26);
             this.txtPasswordInput.TabIndex = 1;
             // 

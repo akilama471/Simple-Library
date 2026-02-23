@@ -60,7 +60,7 @@
             this.txtCopyNumber.SelectedText = "";
             this.txtCopyNumber.SelectionLength = 0;
             this.txtCopyNumber.SelectionStart = 0;
-            this.txtCopyNumber.Size = new System.Drawing.Size(568, 23);
+            this.txtCopyNumber.Size = new System.Drawing.Size(567, 23);
             this.txtCopyNumber.TabIndex = 1;
             this.txtCopyNumber.UseSystemPasswordChar = false;
             // 
@@ -127,13 +127,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(705, 450);
+            this.ClientSize = new System.Drawing.Size(705, 159);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnReturn);
             this.Controls.Add(this.btnCheck);
             this.Controls.Add(this.txtCopyNumber);
             this.Controls.Add(this.materialLabel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ReturnForm";
             this.Text = "Return Book";
             this.ResumeLayout(false);

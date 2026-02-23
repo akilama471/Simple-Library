@@ -51,6 +51,7 @@
             this.dismissMemberFromButton.TabIndex = 1;
             this.dismissMemberFromButton.Text = "Cancel";
             this.dismissMemberFromButton.UseVisualStyleBackColor = false;
+            this.dismissMemberFromButton.Click += new System.EventHandler(this.dismissMemberFromButton_Click);
             // 
             // submitMemberFromButton
             // 
