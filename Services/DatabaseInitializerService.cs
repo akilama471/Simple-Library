@@ -76,6 +76,17 @@ namespace SarasaviLibrary.Data
                     BookId INT NOT NULL FOREIGN KEY REFERENCES Books(BookId),
                     MemberId INT NOT NULL FOREIGN KEY REFERENCES Members(MemberId),
                     ReservationDate DATETIME NOT NULL
+                )",
+
+                // Create Admins Table
+                @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Admins' AND xtype='U')
+                CREATE TABLE Admins (
+                    AdminId INT IDENTITY(1,1) PRIMARY KEY,
+                    Username NVARCHAR(50) NOT NULL UNIQUE,
+                    PasswordHash NVARCHAR(255) NOT NULL,
+                    Role NVARCHAR(20) DEFAULT 'Admin',
+                    CreatedAt DATETIME DEFAULT GETDATE(),
+                    UpdatedAt DATETIME DEFAULT GETDATE()
                 )"
             };
 
@@ -176,7 +187,26 @@ namespace SarasaviLibrary.Data
                 CLOSE TableCursor;
                 DEALLOCATE TableCursor;
             ";
+            // Migration: Add Timestamps to all primary tables ... (existing code) ...
             DatabaseHelper.ExecuteNonQuery(addTimestampsQuery);
+
+            // Seed/Reset Default Admin
+            string seedAdminQuery = @"
+                -- Force hash to 'admin123' if already exists, or insert new
+                IF EXISTS (SELECT * FROM Admins WHERE Username = 'admin')
+                BEGIN
+                    UPDATE Admins 
+                    SET PasswordHash = '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9',
+                        Role = 'SuperAdmin',
+                        UpdatedAt = GETDATE()
+                    WHERE Username = 'admin';
+                END
+                ELSE
+                BEGIN
+                    INSERT INTO Admins (Username, PasswordHash, Role) 
+                    VALUES ('admin', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'SuperAdmin');
+                END";
+            DatabaseHelper.ExecuteNonQuery(seedAdminQuery);
         }
     }
 }

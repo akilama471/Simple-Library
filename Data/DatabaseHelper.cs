@@ -18,6 +18,26 @@ namespace SarasaviLibrary.Data
             return new SqlConnection(ConnectionString);
         }
 
+        public static async Task TestConnectionAsync(int timeoutMilliseconds = 5000)
+        {
+            using (SqlConnection conn = GetConnection())
+            {
+                var connTask = conn.OpenAsync();
+                if (await Task.WhenAny(connTask, Task.Delay(timeoutMilliseconds)) == connTask)
+                {
+                    await connTask; // Ensure any exception is thrown
+                    using (SqlCommand cmd = new SqlCommand("SELECT 1", conn))
+                    {
+                        await cmd.ExecuteScalarAsync();
+                    }
+                }
+                else
+                {
+                    throw new TimeoutException("Connection to database timed out. Please check if SQL Server LocalDB is running.");
+                }
+            }
+        }
+
         public static void CheckDBConnection()
         {
             using (SqlConnection conn = GetConnection())

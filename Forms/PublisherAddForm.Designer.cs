@@ -83,6 +83,7 @@
             this.dismissPublisherFromButton.TabIndex = 16;
             this.dismissPublisherFromButton.Text = "Cancel";
             this.dismissPublisherFromButton.UseVisualStyleBackColor = true;
+            this.dismissPublisherFromButton.Click += new System.EventHandler(this.dismissPublisherFromButton_Click);
             // 
             // panel1
             // 

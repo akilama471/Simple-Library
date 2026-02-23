@@ -72,6 +72,7 @@
             this.openAddAuthorButton.TabIndex = 5;
             this.openAddAuthorButton.Text = "Add";
             this.openAddAuthorButton.UseVisualStyleBackColor = true;
+            this.openAddAuthorButton.Click += new System.EventHandler(this.OpenAddAuthorButton_Click);
             // 
             // editSelectedAuthorButton
             // 
@@ -83,6 +84,7 @@
             this.editSelectedAuthorButton.TabIndex = 4;
             this.editSelectedAuthorButton.Text = "Edit";
             this.editSelectedAuthorButton.UseVisualStyleBackColor = true;
+            this.editSelectedAuthorButton.Click += new System.EventHandler(this.EditSelectedAuthorButton_Click);
             // 
             // deleteSelectedAuthorButton
             // 
@@ -94,6 +96,7 @@
             this.deleteSelectedAuthorButton.TabIndex = 3;
             this.deleteSelectedAuthorButton.Text = "Delete";
             this.deleteSelectedAuthorButton.UseVisualStyleBackColor = true;
+            this.deleteSelectedAuthorButton.Click += new System.EventHandler(this.DeleteSelectedAuthorButton_Click);
             // 
             // AuthorListForm
             // 

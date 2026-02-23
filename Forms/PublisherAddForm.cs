@@ -47,5 +47,10 @@ namespace SarasaviLibrary.Forms
                 MessageBox.Show($"Error adding publisher: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void dismissPublisherFromButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

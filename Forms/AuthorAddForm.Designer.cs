@@ -80,6 +80,7 @@
             this.dismissAuthorFromButton.TabIndex = 12;
             this.dismissAuthorFromButton.Text = "Cancel";
             this.dismissAuthorFromButton.UseVisualStyleBackColor = true;
+            this.dismissAuthorFromButton.Click += new System.EventHandler(this.dismissAuthorFromButton_Click);
             // 
             // AuthorAddForm
             // 

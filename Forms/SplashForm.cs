@@ -17,18 +17,6 @@ namespace SarasaviLibrary.Forms
             InitializeComponent();
         }
 
-        public void UpdateProgress(int value, string status)
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new Action(() => UpdateProgress(value, status)));
-                return;
-            }
-
-            progressBar1.Value = value;
-            lblStatus.Text = status;
-        }
-
         private void SplashForm_Shown(object sender, EventArgs e)
         {
         }

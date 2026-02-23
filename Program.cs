@@ -1,6 +1,7 @@
 ﻿using SarasaviLibrary.Forms;
 using SarasaviLibrary.Services;
 using System;
+using System.Threading; // Added for Thread.Sleep
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,37 +15,45 @@ namespace SarasaviLibrary
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            RunApplicationAsync().GetAwaiter().GetResult();
-        }
-
-        private static async Task RunApplicationAsync()
-        {
             SplashForm splash = new SplashForm();
             splash.Show();
-            Application.DoEvents();
+            splash.Refresh();
 
+            // 1. Initialize Database during the delay
             try
             {
-                await AppInitializerServices.InitializeAsync((value, message) =>
-                {
-                    splash.UpdateProgress(value, message);
-                });
-
-                splash.Hide();
-                Application.Run(new MainForm());
+                // We run this once to ensure schema is ready
+                Data.DatabaseInitializerService.Initialize();
             }
             catch (Exception ex)
             {
                 splash.Hide();
-
-                MessageBox.Show(
-                    $"Startup Failed:\n\n{ex.Message}",
-                    "Application Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-
-                Application.Exit();
+                MessageBox.Show($"Database Initialization Failed: {ex.Message}\n\nPlease check if SQL Server LocalDB is running.", "Startup Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            // 3 second delay as requested
+            DateTime endTime = DateTime.Now.AddSeconds(3);
+            while (DateTime.Now < endTime)
+            {
+                Application.DoEvents();
+                System.Threading.Thread.Sleep(100);
+            }
+
+            splash.Hide();
+
+            // 2. Show Login Screen
+            using (Login login = new Login())
+            {
+                if (login.ShowDialog() != DialogResult.OK)
+                {
+                    Application.Exit();
+                    return;
+                }
+            }
+
+            // 3. Show Main Form
+            Application.Run(new MainForm());
         }
 
     }

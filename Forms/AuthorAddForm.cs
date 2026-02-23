@@ -14,9 +14,19 @@ namespace SarasaviLibrary.Forms
 {
     public partial class AuthorAddForm : Form
     {
+        private Author _editingAuthor;
+
         public AuthorAddForm()
         {
             InitializeComponent();
+        }
+
+        public AuthorAddForm(Author author) : this()
+        {
+            _editingAuthor = author;
+            authorNameInputField.Text = author.Name;
+            this.Text = "Edit Author";
+            submitAuthorFromButton.Text = "Update";
         }
 
         private void submitAuthorFromButton_Click(object sender, EventArgs e)
@@ -27,25 +37,35 @@ namespace SarasaviLibrary.Forms
                 return;
             }
 
-            // Create Author object
-            Author author = new Author
-            {
-                Name = authorNameInputField.Text,
-            };
-
-            // Save to database
             AuthorRepository repo = new AuthorRepository();
 
             try
             {
-                repo.Add(author);
-                MessageBox.Show("Author added successfully!");
+                if (_editingAuthor == null)
+                {
+                    // Add new author
+                    Author newAuthor = new Author { Name = authorNameInputField.Text };
+                    repo.Add(newAuthor);
+                    MessageBox.Show("Author added successfully!");
+                }
+                else
+                {
+                    // Update existing author
+                    _editingAuthor.Name = authorNameInputField.Text;
+                    repo.Update(_editingAuthor);
+                    MessageBox.Show("Author updated successfully!");
+                }
                 this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding author: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error saving author: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void dismissAuthorFromButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
