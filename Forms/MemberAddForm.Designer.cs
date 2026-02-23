@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MemberAddForm));
             this.dismissMemberFromButton = new System.Windows.Forms.Button();
             this.submitMemberFromButton = new System.Windows.Forms.Button();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
@@ -38,14 +39,16 @@
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.memberSexInputField = new System.Windows.Forms.ComboBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dismissMemberFromButton
             // 
             this.dismissMemberFromButton.BackColor = System.Drawing.Color.Red;
             this.dismissMemberFromButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.dismissMemberFromButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dismissMemberFromButton.Location = new System.Drawing.Point(270, 202);
+            this.dismissMemberFromButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dismissMemberFromButton.Location = new System.Drawing.Point(16, 364);
             this.dismissMemberFromButton.Name = "dismissMemberFromButton";
             this.dismissMemberFromButton.Size = new System.Drawing.Size(120, 46);
             this.dismissMemberFromButton.TabIndex = 1;
@@ -55,8 +58,8 @@
             // 
             // submitMemberFromButton
             // 
-            this.submitMemberFromButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.submitMemberFromButton.Location = new System.Drawing.Point(396, 201);
+            this.submitMemberFromButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.submitMemberFromButton.Location = new System.Drawing.Point(216, 364);
             this.submitMemberFromButton.Name = "submitMemberFromButton";
             this.submitMemberFromButton.Size = new System.Drawing.Size(120, 46);
             this.submitMemberFromButton.TabIndex = 2;
@@ -70,7 +73,7 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(8, 24);
+            this.materialLabel1.Location = new System.Drawing.Point(12, 152);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(57, 19);
@@ -81,14 +84,14 @@
             // 
             this.memberNameInputField.Depth = 0;
             this.memberNameInputField.Hint = "";
-            this.memberNameInputField.Location = new System.Drawing.Point(12, 46);
+            this.memberNameInputField.Location = new System.Drawing.Point(16, 174);
             this.memberNameInputField.MouseState = MaterialSkin.MouseState.HOVER;
             this.memberNameInputField.Name = "memberNameInputField";
             this.memberNameInputField.PasswordChar = '\0';
             this.memberNameInputField.SelectedText = "";
             this.memberNameInputField.SelectionLength = 0;
             this.memberNameInputField.SelectionStart = 0;
-            this.memberNameInputField.Size = new System.Drawing.Size(504, 23);
+            this.memberNameInputField.Size = new System.Drawing.Size(320, 23);
             this.memberNameInputField.TabIndex = 5;
             this.memberNameInputField.UseSystemPasswordChar = false;
             // 
@@ -96,7 +99,7 @@
             // 
             this.memberNICInputField.Depth = 0;
             this.memberNICInputField.Hint = "";
-            this.memberNICInputField.Location = new System.Drawing.Point(12, 109);
+            this.memberNICInputField.Location = new System.Drawing.Point(15, 227);
             this.memberNICInputField.MouseState = MaterialSkin.MouseState.HOVER;
             this.memberNICInputField.Name = "memberNICInputField";
             this.memberNICInputField.PasswordChar = '\0';
@@ -113,7 +116,7 @@
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel2.Location = new System.Drawing.Point(8, 87);
+            this.materialLabel2.Location = new System.Drawing.Point(11, 205);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(42, 19);
@@ -124,14 +127,14 @@
             // 
             this.memberAddressInputField.Depth = 0;
             this.memberAddressInputField.Hint = "";
-            this.memberAddressInputField.Location = new System.Drawing.Point(12, 172);
+            this.memberAddressInputField.Location = new System.Drawing.Point(16, 335);
             this.memberAddressInputField.MouseState = MaterialSkin.MouseState.HOVER;
             this.memberAddressInputField.Name = "memberAddressInputField";
             this.memberAddressInputField.PasswordChar = '\0';
             this.memberAddressInputField.SelectedText = "";
             this.memberAddressInputField.SelectionLength = 0;
             this.memberAddressInputField.SelectionStart = 0;
-            this.memberAddressInputField.Size = new System.Drawing.Size(504, 23);
+            this.memberAddressInputField.Size = new System.Drawing.Size(320, 23);
             this.memberAddressInputField.TabIndex = 9;
             this.memberAddressInputField.UseSystemPasswordChar = false;
             // 
@@ -141,7 +144,7 @@
             this.materialLabel3.Depth = 0;
             this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel3.Location = new System.Drawing.Point(8, 150);
+            this.materialLabel3.Location = new System.Drawing.Point(12, 313);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
             this.materialLabel3.Size = new System.Drawing.Size(72, 19);
@@ -154,7 +157,7 @@
             this.materialLabel4.Depth = 0;
             this.materialLabel4.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel4.Location = new System.Drawing.Point(334, 87);
+            this.materialLabel4.Location = new System.Drawing.Point(12, 258);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
             this.materialLabel4.Size = new System.Drawing.Size(41, 19);
@@ -167,16 +170,28 @@
             this.memberSexInputField.Items.AddRange(new object[] {
             "Male",
             "Female"});
-            this.memberSexInputField.Location = new System.Drawing.Point(338, 109);
+            this.memberSexInputField.Location = new System.Drawing.Point(16, 280);
             this.memberSexInputField.Name = "memberSexInputField";
-            this.memberSexInputField.Size = new System.Drawing.Size(178, 21);
+            this.memberSexInputField.Size = new System.Drawing.Size(320, 21);
             this.memberSexInputField.TabIndex = 11;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(99, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(156, 147);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
             // 
             // MemberAddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(528, 256);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.ClientSize = new System.Drawing.Size(350, 420);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.memberSexInputField);
             this.Controls.Add(this.materialLabel4);
             this.Controls.Add(this.memberAddressInputField);
@@ -194,6 +209,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "New Member";
             this.TopMost = true;
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -211,5 +227,6 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private System.Windows.Forms.ComboBox memberSexInputField;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

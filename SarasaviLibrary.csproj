@@ -210,6 +210,9 @@
     <EmbeddedResource Include="Forms\PublisherListForm.resx">
       <DependentUpon>PublisherListForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ReportForm.resx">
+      <DependentUpon>ReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ReservationForm.resx">
       <DependentUpon>ReservationForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -24,9 +24,9 @@ namespace SarasaviLibrary.Forms
             this.dgvReport = new System.Windows.Forms.DataGridView();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.pnlFilters = new System.Windows.Forms.Panel();
-            this.rbAllBorrow = new System.Windows.Forms.RadioButton();
-            this.rbActiveBorrow = new System.Windows.Forms.RadioButton();
             this.chkDelayedBorrow = new System.Windows.Forms.CheckBox();
+            this.rbActiveBorrow = new System.Windows.Forms.RadioButton();
+            this.rbAllBorrow = new System.Windows.Forms.RadioButton();
             this.pnlMemberSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).BeginInit();
             this.pnlTop.SuspendLayout();
@@ -50,7 +50,7 @@ namespace SarasaviLibrary.Forms
             this.lblReportType.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblReportType.Location = new System.Drawing.Point(21, 21);
             this.lblReportType.Name = "lblReportType";
-            this.lblReportType.Size = new System.Drawing.Size(110, 19);
+            this.lblReportType.Size = new System.Drawing.Size(92, 19);
             this.lblReportType.TabIndex = 1;
             this.lblReportType.Text = "Select Report:";
             // 
@@ -97,7 +97,7 @@ namespace SarasaviLibrary.Forms
             // 
             this.dgvReport.AllowUserToAddRows = false;
             this.dgvReport.AllowUserToDeleteRows = false;
-            this.dgvReport.BackgroundColor = System.Drawing.Color.White;
+            this.dgvReport.BackgroundColor = System.Drawing.Color.MediumSpringGreen;
             this.dgvReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvReport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvReport.Location = new System.Drawing.Point(0, 60);
@@ -131,6 +131,28 @@ namespace SarasaviLibrary.Forms
             this.pnlFilters.Size = new System.Drawing.Size(350, 40);
             this.pnlFilters.TabIndex = 5;
             // 
+            // chkDelayedBorrow
+            // 
+            this.chkDelayedBorrow.AutoSize = true;
+            this.chkDelayedBorrow.Location = new System.Drawing.Point(193, 11);
+            this.chkDelayedBorrow.Name = "chkDelayedBorrow";
+            this.chkDelayedBorrow.Size = new System.Drawing.Size(109, 19);
+            this.chkDelayedBorrow.TabIndex = 2;
+            this.chkDelayedBorrow.Text = "Delayed Borrow";
+            this.chkDelayedBorrow.UseVisualStyleBackColor = true;
+            this.chkDelayedBorrow.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
+            // 
+            // rbActiveBorrow
+            // 
+            this.rbActiveBorrow.AutoSize = true;
+            this.rbActiveBorrow.Location = new System.Drawing.Point(89, 11);
+            this.rbActiveBorrow.Name = "rbActiveBorrow";
+            this.rbActiveBorrow.Size = new System.Drawing.Size(99, 19);
+            this.rbActiveBorrow.TabIndex = 1;
+            this.rbActiveBorrow.Text = "Active Borrow";
+            this.rbActiveBorrow.UseVisualStyleBackColor = true;
+            this.rbActiveBorrow.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
+            // 
             // rbAllBorrow
             // 
             this.rbAllBorrow.AutoSize = true;
@@ -143,28 +165,6 @@ namespace SarasaviLibrary.Forms
             this.rbAllBorrow.Text = "All Borrow";
             this.rbAllBorrow.UseVisualStyleBackColor = true;
             this.rbAllBorrow.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
-            // 
-            // rbActiveBorrow
-            // 
-            this.rbActiveBorrow.AutoSize = true;
-            this.rbActiveBorrow.Location = new System.Drawing.Point(89, 11);
-            this.rbActiveBorrow.Name = "rbActiveBorrow";
-            this.rbActiveBorrow.Size = new System.Drawing.Size(98, 19);
-            this.rbActiveBorrow.TabIndex = 1;
-            this.rbActiveBorrow.Text = "Active Borrow";
-            this.rbActiveBorrow.UseVisualStyleBackColor = true;
-            this.rbActiveBorrow.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
-            // 
-            // chkDelayedBorrow
-            // 
-            this.chkDelayedBorrow.AutoSize = true;
-            this.chkDelayedBorrow.Location = new System.Drawing.Point(193, 11);
-            this.chkDelayedBorrow.Name = "chkDelayedBorrow";
-            this.chkDelayedBorrow.Size = new System.Drawing.Size(110, 19);
-            this.chkDelayedBorrow.TabIndex = 2;
-            this.chkDelayedBorrow.Text = "Delayed Borrow";
-            this.chkDelayedBorrow.UseVisualStyleBackColor = true;
-            this.chkDelayedBorrow.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
             // 
             // ReportForm
             // 

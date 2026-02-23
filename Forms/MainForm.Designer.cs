@@ -36,6 +36,7 @@
             this.InquiryRibbonButton = new System.Windows.Forms.RibbonButton();
             this.loanRibbonButton = new System.Windows.Forms.RibbonButton();
             this.returnRibbonButton = new System.Windows.Forms.RibbonButton();
+            this.reservationRibbonButton = new System.Windows.Forms.RibbonButton();
             this.ribbonTab2 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel2 = new System.Windows.Forms.RibbonPanel();
             this.addBookRibbonButton = new System.Windows.Forms.RibbonButton();
@@ -54,7 +55,6 @@
             this.borrowBookHistoryRibbonButton = new System.Windows.Forms.RibbonButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.LoadingProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.reservationRibbonButton = new System.Windows.Forms.RibbonButton();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -138,6 +138,16 @@
             this.returnRibbonButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("returnRibbonButton.SmallImage")));
             this.returnRibbonButton.Text = "Return";
             this.returnRibbonButton.Click += new System.EventHandler(this.returnRibbonButton_Click);
+            // 
+            // reservationRibbonButton
+            // 
+            this.reservationRibbonButton.Image = ((System.Drawing.Image)(resources.GetObject("reservationRibbonButton.Image")));
+            this.reservationRibbonButton.LargeImage = ((System.Drawing.Image)(resources.GetObject("reservationRibbonButton.LargeImage")));
+            this.reservationRibbonButton.MinimumSize = new System.Drawing.Size(64, 0);
+            this.reservationRibbonButton.Name = "reservationRibbonButton";
+            this.reservationRibbonButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("reservationRibbonButton.SmallImage")));
+            this.reservationRibbonButton.Text = "Reservation";
+            this.reservationRibbonButton.Click += new System.EventHandler(this.reservationRibbonButton_Click);
             // 
             // ribbonTab2
             // 
@@ -282,7 +292,7 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LoadingProgressBar});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 672);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 495);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1082, 22);
             this.statusStrip1.TabIndex = 3;
@@ -294,23 +304,16 @@
             this.LoadingProgressBar.Size = new System.Drawing.Size(100, 16);
             this.LoadingProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             // 
-            // reservationRibbonButton
-            // 
-            this.reservationRibbonButton.Image = ((System.Drawing.Image)(resources.GetObject("reservationRibbonButton.Image")));
-            this.reservationRibbonButton.LargeImage = ((System.Drawing.Image)(resources.GetObject("reservationRibbonButton.LargeImage")));
-            this.reservationRibbonButton.MinimumSize = new System.Drawing.Size(64, 0);
-            this.reservationRibbonButton.Name = "reservationRibbonButton";
-            this.reservationRibbonButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("reservationRibbonButton.SmallImage")));
-            this.reservationRibbonButton.Text = "Reservation";
-            this.reservationRibbonButton.Click += new System.EventHandler(this.reservationRibbonButton_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1082, 694);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(1082, 517);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.ribbon1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.KeyPreview = true;
             this.Name = "MainForm";

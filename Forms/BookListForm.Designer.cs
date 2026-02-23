@@ -30,18 +30,18 @@
         {
             this.bookDataGridView = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.searchBookNumberInput = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.searchBookButton = new System.Windows.Forms.Button();
+            this.searchBookPublisherInput = new System.Windows.Forms.ComboBox();
+            this.searchBookAuthorInput = new System.Windows.Forms.ComboBox();
+            this.searchBookNameInput = new System.Windows.Forms.ComboBox();
             this.openAddBookButton = new System.Windows.Forms.Button();
             this.editSelectedBookButton = new System.Windows.Forms.Button();
             this.deleteSelectedBookButton = new System.Windows.Forms.Button();
-            this.searchBookNameInput = new System.Windows.Forms.ComboBox();
-            this.searchBookAuthorInput = new System.Windows.Forms.ComboBox();
-            this.searchBookPublisherInput = new System.Windows.Forms.ComboBox();
-            this.searchBookButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.searchBookNumberInput = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.bookDataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +52,7 @@
             this.bookDataGridView.AllowUserToDeleteRows = false;
             this.bookDataGridView.AllowUserToOrderColumns = true;
             this.bookDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.bookDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.bookDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.bookDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bookDataGridView.Location = new System.Drawing.Point(0, 56);
@@ -81,6 +82,92 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1082, 56);
             this.panel1.TabIndex = 4;
+            // 
+            // searchBookNumberInput
+            // 
+            this.searchBookNumberInput.Location = new System.Drawing.Point(6, 25);
+            this.searchBookNumberInput.Name = "searchBookNumberInput";
+            this.searchBookNumberInput.Size = new System.Drawing.Size(185, 20);
+            this.searchBookNumberInput.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(577, 5);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(98, 16);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Book Publisher";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(386, 5);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(80, 16);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Book Author";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(195, 5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 16);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Book Name";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(7, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 16);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Book Number";
+            // 
+            // searchBookButton
+            // 
+            this.searchBookButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.searchBookButton.Location = new System.Drawing.Point(771, 11);
+            this.searchBookButton.Name = "searchBookButton";
+            this.searchBookButton.Size = new System.Drawing.Size(76, 36);
+            this.searchBookButton.TabIndex = 13;
+            this.searchBookButton.Text = "Search";
+            this.searchBookButton.UseVisualStyleBackColor = true;
+            this.searchBookButton.Click += new System.EventHandler(this.SearchBookButton_Click);
+            // 
+            // searchBookPublisherInput
+            // 
+            this.searchBookPublisherInput.FormattingEnabled = true;
+            this.searchBookPublisherInput.Location = new System.Drawing.Point(580, 24);
+            this.searchBookPublisherInput.Name = "searchBookPublisherInput";
+            this.searchBookPublisherInput.Size = new System.Drawing.Size(185, 21);
+            this.searchBookPublisherInput.TabIndex = 12;
+            // 
+            // searchBookAuthorInput
+            // 
+            this.searchBookAuthorInput.FormattingEnabled = true;
+            this.searchBookAuthorInput.Location = new System.Drawing.Point(389, 24);
+            this.searchBookAuthorInput.Name = "searchBookAuthorInput";
+            this.searchBookAuthorInput.Size = new System.Drawing.Size(185, 21);
+            this.searchBookAuthorInput.TabIndex = 11;
+            // 
+            // searchBookNameInput
+            // 
+            this.searchBookNameInput.FormattingEnabled = true;
+            this.searchBookNameInput.Location = new System.Drawing.Point(198, 24);
+            this.searchBookNameInput.Name = "searchBookNameInput";
+            this.searchBookNameInput.Size = new System.Drawing.Size(185, 21);
+            this.searchBookNameInput.TabIndex = 10;
             // 
             // openAddBookButton
             // 
@@ -114,92 +201,6 @@
             this.deleteSelectedBookButton.TabIndex = 6;
             this.deleteSelectedBookButton.Text = "Delete";
             this.deleteSelectedBookButton.UseVisualStyleBackColor = true;
-            // 
-            // searchBookNameInput
-            // 
-            this.searchBookNameInput.FormattingEnabled = true;
-            this.searchBookNameInput.Location = new System.Drawing.Point(198, 24);
-            this.searchBookNameInput.Name = "searchBookNameInput";
-            this.searchBookNameInput.Size = new System.Drawing.Size(185, 21);
-            this.searchBookNameInput.TabIndex = 10;
-            // 
-            // searchBookAuthorInput
-            // 
-            this.searchBookAuthorInput.FormattingEnabled = true;
-            this.searchBookAuthorInput.Location = new System.Drawing.Point(389, 24);
-            this.searchBookAuthorInput.Name = "searchBookAuthorInput";
-            this.searchBookAuthorInput.Size = new System.Drawing.Size(185, 21);
-            this.searchBookAuthorInput.TabIndex = 11;
-            // 
-            // searchBookPublisherInput
-            // 
-            this.searchBookPublisherInput.FormattingEnabled = true;
-            this.searchBookPublisherInput.Location = new System.Drawing.Point(580, 24);
-            this.searchBookPublisherInput.Name = "searchBookPublisherInput";
-            this.searchBookPublisherInput.Size = new System.Drawing.Size(185, 21);
-            this.searchBookPublisherInput.TabIndex = 12;
-            // 
-            // searchBookButton
-            // 
-            this.searchBookButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.searchBookButton.Location = new System.Drawing.Point(771, 11);
-            this.searchBookButton.Name = "searchBookButton";
-            this.searchBookButton.Size = new System.Drawing.Size(76, 36);
-            this.searchBookButton.TabIndex = 13;
-            this.searchBookButton.Text = "Search";
-            this.searchBookButton.UseVisualStyleBackColor = true;
-            this.searchBookButton.Click += new System.EventHandler(this.SearchBookButton_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(7, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 16);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Book Number";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(195, 5);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 16);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "Book Name";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(577, 5);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(98, 16);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "Book Publisher";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(386, 5);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 16);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Book Author";
-            // 
-            // searchBookNumberInput
-            // 
-            this.searchBookNumberInput.Location = new System.Drawing.Point(6, 25);
-            this.searchBookNumberInput.Name = "searchBookNumberInput";
-            this.searchBookNumberInput.Size = new System.Drawing.Size(185, 20);
-            this.searchBookNumberInput.TabIndex = 5;
             // 
             // BookListForm
             // 

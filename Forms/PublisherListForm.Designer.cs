@@ -33,6 +33,7 @@
             this.openAddPublisherButton = new System.Windows.Forms.Button();
             this.editSelectedPublisherButton = new System.Windows.Forms.Button();
             this.deleteSelectedPublisherButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.publisherDataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -40,6 +41,7 @@
             // publisherDataGridView
             // 
             this.publisherDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.publisherDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.publisherDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.publisherDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.publisherDataGridView.Location = new System.Drawing.Point(0, 0);
@@ -52,6 +54,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(71)))), ((int)(((byte)(71)))));
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.openAddPublisherButton);
             this.panel1.Controls.Add(this.editSelectedPublisherButton);
             this.panel1.Controls.Add(this.deleteSelectedPublisherButton);
@@ -64,7 +67,7 @@
             // openAddPublisherButton
             // 
             this.openAddPublisherButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.openAddPublisherButton.Location = new System.Drawing.Point(4, 6);
+            this.openAddPublisherButton.Location = new System.Drawing.Point(605, 7);
             this.openAddPublisherButton.Name = "openAddPublisherButton";
             this.openAddPublisherButton.Size = new System.Drawing.Size(60, 36);
             this.openAddPublisherButton.TabIndex = 5;
@@ -96,6 +99,17 @@
             this.deleteSelectedPublisherButton.UseVisualStyleBackColor = true;
             this.deleteSelectedPublisherButton.Click += new System.EventHandler(this.DeleteSelectedPublisherButton_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(12, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(181, 25);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "List Of Publishers";
+            // 
             // PublisherListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -108,6 +122,7 @@
             this.Load += new System.EventHandler(this.PublisherListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.publisherDataGridView)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -118,5 +133,6 @@
         private System.Windows.Forms.Button openAddPublisherButton;
         private System.Windows.Forms.Button editSelectedPublisherButton;
         private System.Windows.Forms.Button deleteSelectedPublisherButton;
+        private System.Windows.Forms.Label label1;
     }
 }
