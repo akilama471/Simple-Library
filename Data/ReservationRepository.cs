@@ -61,5 +61,18 @@ namespace SarasaviLibrary.Data
              }
              return null;
         }
+        public DataTable GetReservationReport()
+        {
+            string query = @"SELECT 
+                                b.Title as [Book Title], 
+                                m.Name as [Member Name], 
+                                m.NIC,
+                                r.ReservationDate as [Reservation Date]
+                             FROM Reservations r
+                             JOIN Books b ON r.BookId = b.BookId
+                             JOIN Members m ON r.MemberId = m.MemberId
+                             ORDER BY r.ReservationDate DESC";
+            return DatabaseHelper.ExecuteQuery(query);
+        }
     }
 }

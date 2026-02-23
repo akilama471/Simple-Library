@@ -54,6 +54,7 @@
             this.borrowBookHistoryRibbonButton = new System.Windows.Forms.RibbonButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.LoadingProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.reservationRibbonButton = new System.Windows.Forms.RibbonButton();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,6 +104,7 @@
             this.ribbonPanel1.Items.Add(this.InquiryRibbonButton);
             this.ribbonPanel1.Items.Add(this.loanRibbonButton);
             this.ribbonPanel1.Items.Add(this.returnRibbonButton);
+            this.ribbonPanel1.Items.Add(this.reservationRibbonButton);
             this.ribbonPanel1.Name = "ribbonPanel1";
             this.ribbonPanel1.Text = "ribbonPanel1";
             // 
@@ -292,6 +294,16 @@
             this.LoadingProgressBar.Size = new System.Drawing.Size(100, 16);
             this.LoadingProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             // 
+            // reservationRibbonButton
+            // 
+            this.reservationRibbonButton.Image = ((System.Drawing.Image)(resources.GetObject("reservationRibbonButton.Image")));
+            this.reservationRibbonButton.LargeImage = ((System.Drawing.Image)(resources.GetObject("reservationRibbonButton.LargeImage")));
+            this.reservationRibbonButton.MinimumSize = new System.Drawing.Size(64, 0);
+            this.reservationRibbonButton.Name = "reservationRibbonButton";
+            this.reservationRibbonButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("reservationRibbonButton.SmallImage")));
+            this.reservationRibbonButton.Text = "Reservation";
+            this.reservationRibbonButton.Click += new System.EventHandler(this.reservationRibbonButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -338,5 +350,6 @@
         private System.Windows.Forms.RibbonButton borrowBookHistoryRibbonButton;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar LoadingProgressBar;
+        private System.Windows.Forms.RibbonButton reservationRibbonButton;
     }
 }

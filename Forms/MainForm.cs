@@ -227,5 +227,22 @@ namespace SarasaviLibrary.Forms
             reportForm.StartPosition = FormStartPosition.CenterParent;
             reportForm.Show();
         }
+
+        private void reservationRibbonButton_Click(object sender, EventArgs e)
+        {
+
+            foreach (Form child in this.MdiChildren)
+            {
+                if (child is ReservationForm)
+                {
+                    child.Focus(); // Bring it to front
+                    return;        // Exit, don’t open new
+                }
+            }
+            ReservationForm reservationForm = new ReservationForm();
+            reservationForm.MdiParent = this;
+            reservationForm.StartPosition = FormStartPosition.CenterParent;
+            reservationForm.Show();
+        }
     }
 }

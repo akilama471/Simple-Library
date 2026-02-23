@@ -8,11 +8,13 @@ namespace SarasaviLibrary.Forms
     public partial class ReportForm : Form
     {
         private LoanRepository _loanRepository;
+        private ReservationRepository _reservationRepository;
 
         public ReportForm()
         {
             InitializeComponent();
             _loanRepository = new LoanRepository();
+            _reservationRepository = new ReservationRepository();
             InitializeReportTypes();
         }
 
@@ -20,6 +22,7 @@ namespace SarasaviLibrary.Forms
         {
             cmbReportType.Items.Add("Borrowed History");
             cmbReportType.Items.Add("Member History");
+            cmbReportType.Items.Add("Reservations");
             cmbReportType.SelectedIndex = 0;
             pnlMemberSearch.Visible = false;
             pnlFilters.Visible = true;
@@ -89,6 +92,9 @@ namespace SarasaviLibrary.Forms
                         {
                             MessageBox.Show("Please enter a valid numeric Member ID.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
+                        break;
+                    case "Reservations":
+                        dgvReport.DataSource = _reservationRepository.GetReservationReport();
                         break;
                 }
                 
