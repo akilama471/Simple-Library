@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SarasaviLibrary.Data
 {
-    public static class DatabaseInitializer
+    public static class DatabaseInitializerService
     {
         public static void Initialize()
         {

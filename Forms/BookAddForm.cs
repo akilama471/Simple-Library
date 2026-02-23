@@ -48,77 +48,6 @@ namespace SarasaviLibrary.Forms
             }
         }
 
-        private void addBook()
-        {
-            if (string.IsNullOrWhiteSpace(bookNameInputField.Text) ||
-                string.IsNullOrWhiteSpace(bookISBNInputField.Text) || // ISBN Check
-                comboBox1.SelectedItem == null ||
-                comboBox2.SelectedItem == null)
-            {
-                MessageBox.Show("Please fill all required fields (Title, Author, Publisher, ISBN).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            try
-            {
-                Book book = new Book
-                {
-                     // BookNumber is auto-generated in Repository
-                    Title = bookNameInputField.Text,
-                    AuthorId = (int)comboBox1.SelectedValue,
-                    PublisherId = (int)comboBox2.SelectedValue,
-                    Classification = bookClassificationInputField.Text,
-                    ISBN = bookISBNInputField.Text,
-                    Edition = bookEditionInputField.Text,
-                    // Note: IsReferenceOnly on Book is legacy/default, actual check is on Copy
-                    IsReferenceOnly = bookRefferanceInputField.Checked,
-                    Copies = new List<Copy>()
-                };
-
-                foreach (DataGridViewRow row in bookCopyGrid.Rows)
-                {
-                    if (row.Cells.Count > 1 && row.Cells[0].Value != null)
-                    {
-                        bool isRefOnly = row.Cells[1].Value != null && Convert.ToBoolean(row.Cells[1].Value);
-                        book.Copies.Add(new Copy
-                        {
-                            IsAvailable = true,
-                            IsReferenceOnly = isRefOnly
-                        });
-                    }
-                }
-
-                BookRepository repo = new BookRepository();
-                repo.Add(book);
-
-                MessageBox.Show($"Book added successfully!\nBook Number: {book.BookNumber}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                // Check for Unique Constraint Violation (Error 2627 or 2601)
-                if (ex.Number == 2627 || ex.Number == 2601)
-                {
-                    if (ex.Message.Contains("ISBN"))
-                    {
-                        MessageBox.Show("A book with this ISBN already exists. ISBN must be unique.", "Duplicate ISBN", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        MessageBox.Show("A duplicate record exists.", "Duplicate Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show($"Database error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error adding book: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void CancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -183,6 +112,78 @@ namespace SarasaviLibrary.Forms
                 {
                     bookRefferanceInputField.Checked = false;
                 }
+            }
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+
+            if (string.IsNullOrWhiteSpace(bookNameInputField.Text) ||
+                string.IsNullOrWhiteSpace(bookISBNInputField.Text) || // ISBN Check
+                comboBox1.SelectedItem == null ||
+                comboBox2.SelectedItem == null)
+            {
+                MessageBox.Show("Please fill all required fields (Title, Author, Publisher, ISBN).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                Book book = new Book
+                {
+                    // BookNumber is auto-generated in Repository
+                    Title = bookNameInputField.Text,
+                    AuthorId = (int)comboBox1.SelectedValue,
+                    PublisherId = (int)comboBox2.SelectedValue,
+                    Classification = bookClassificationInputField.Text,
+                    ISBN = bookISBNInputField.Text,
+                    Edition = bookEditionInputField.Text,
+                    // Note: IsReferenceOnly on Book is legacy/default, actual check is on Copy
+                    IsReferenceOnly = bookRefferanceInputField.Checked,
+                    Copies = new List<Copy>()
+                };
+
+                foreach (DataGridViewRow row in bookCopyGrid.Rows)
+                {
+                    if (row.Cells.Count > 1 && row.Cells[0].Value != null)
+                    {
+                        bool isRefOnly = row.Cells[1].Value != null && Convert.ToBoolean(row.Cells[1].Value);
+                        book.Copies.Add(new Copy
+                        {
+                            IsAvailable = true,
+                            IsReferenceOnly = isRefOnly
+                        });
+                    }
+                }
+
+                BookRepository repo = new BookRepository();
+                repo.Add(book);
+
+                MessageBox.Show($"Book added successfully!\nBook Number: {book.BookNumber}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                // Check for Unique Constraint Violation (Error 2627 or 2601)
+                if (ex.Number == 2627 || ex.Number == 2601)
+                {
+                    if (ex.Message.Contains("ISBN"))
+                    {
+                        MessageBox.Show("A book with this ISBN already exists. ISBN must be unique.", "Duplicate ISBN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show("A duplicate record exists.", "Duplicate Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"Database error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding book: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -18,6 +18,20 @@ namespace SarasaviLibrary.Data
             return new SqlConnection(ConnectionString);
         }
 
+        public static void CheckDBConnection()
+        {
+            using (SqlConnection conn = GetConnection())
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand("SELECT 1", conn))
+                {
+                    cmd.ExecuteScalar();
+                }
+            }
+        }
+
+
         public static void ExecuteNonQuery(string query, SqlParameter[] parameters = null)
         {
             using (SqlConnection conn = GetConnection())

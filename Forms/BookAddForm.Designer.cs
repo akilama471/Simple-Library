@@ -35,7 +35,7 @@
             this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.btnAddBookCopyButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.bookRefferanceInputField = new MaterialSkin.Controls.MaterialCheckBox();
@@ -51,6 +51,7 @@
             this.bookCopyGrid = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.btnSubmit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bookCopyCountInputField)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bookCopyGrid)).BeginInit();
@@ -146,17 +147,17 @@
             this.btnAddBookCopyButton.UseVisualStyleBackColor = false;
             this.btnAddBookCopyButton.Click += new System.EventHandler(this.btnAddBookCopyButton_Click);
             // 
-            // button1
+            // btnCancel
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.button1.Location = new System.Drawing.Point(462, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(60, 36);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.CancelButton_Click);
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btnCancel.Location = new System.Drawing.Point(5, 5);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(60, 36);
+            this.btnCancel.TabIndex = 12;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // comboBox2
             // 
@@ -303,7 +304,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(71)))), ((int)(((byte)(71)))));
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btnSubmit);
+            this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -334,6 +336,18 @@
             // 
             this.Column2.HeaderText = "Reference Only";
             this.Column2.Name = "Column2";
+            // 
+            // btnSubmit
+            // 
+            this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btnSubmit.Location = new System.Drawing.Point(465, 5);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(60, 36);
+            this.btnSubmit.TabIndex = 13;
+            this.btnSubmit.Text = "Submit";
+            this.btnSubmit.UseVisualStyleBackColor = true;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // BookAddForm
             // 
@@ -385,7 +399,7 @@
         private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField1;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private System.Windows.Forms.Button btnAddBookCopyButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ComboBox comboBox2;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialCheckBox bookRefferanceInputField;
@@ -402,5 +416,6 @@
         private System.Windows.Forms.DataGridView bookCopyGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column2;
+        private System.Windows.Forms.Button btnSubmit;
     }
 }
