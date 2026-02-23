@@ -48,6 +48,25 @@ namespace SarasaviLibrary.Data
             return publishers;
         }
 
+        public void Update(Publisher publisher)
+        {
+            string query = "UPDATE Publishers SET Name = @Name, UpdatedAt = GETDATE() WHERE PublisherId = @Id";
+            SqlParameter[] parameters = {
+                new SqlParameter("@Name", publisher.Name),
+                new SqlParameter("@Id", publisher.PublisherId)
+            };
+            DatabaseHelper.ExecuteNonQuery(query, parameters);
+        }
+
+        public void Delete(int id)
+        {
+            string query = "DELETE FROM Publishers WHERE PublisherId = @Id";
+            SqlParameter[] parameters = {
+                new SqlParameter("@Id", id)
+            };
+            DatabaseHelper.ExecuteNonQuery(query, parameters);
+        }
+
         public Publisher GetById(int id)
         {
             string query = @"

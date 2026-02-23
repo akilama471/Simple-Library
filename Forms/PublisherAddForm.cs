@@ -14,9 +14,19 @@ namespace SarasaviLibrary.Forms
 {
     public partial class PublisherAddForm : Form
     {
+        private Publisher _editingPublisher;
+
         public PublisherAddForm()
         {
             InitializeComponent();
+        }
+
+        public PublisherAddForm(Publisher publisher) : this()
+        {
+            _editingPublisher = publisher;
+            publisherNameInputField.Text = publisher.Name;
+            this.Text = "Edit Publisher";
+            submitPublisherFromButton.Text = "Update";
         }
 
         private void submitPublisherFromButton_Click(object sender, EventArgs e)
@@ -27,24 +37,29 @@ namespace SarasaviLibrary.Forms
                 return;
             }
 
-            // Create Publisher object
-            Publisher publisher = new Publisher
-            {
-                Name = publisherNameInputField.Text,
-            };
-
-            // Save to database
             PublisherRepository repo = new PublisherRepository();
 
             try
             {
-                repo.Add(publisher);
-                MessageBox.Show("Publisher added successfully!");
+                if (_editingPublisher == null)
+                {
+                    // Add new publisher
+                    Publisher newPublisher = new Publisher { Name = publisherNameInputField.Text };
+                    repo.Add(newPublisher);
+                    MessageBox.Show("Publisher added successfully!");
+                }
+                else
+                {
+                    // Update existing publisher
+                    _editingPublisher.Name = publisherNameInputField.Text;
+                    repo.Update(_editingPublisher);
+                    MessageBox.Show("Publisher updated successfully!");
+                }
                 this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding publisher: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error saving publisher: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

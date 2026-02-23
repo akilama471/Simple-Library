@@ -70,6 +70,7 @@
             this.openAddPublisherButton.TabIndex = 5;
             this.openAddPublisherButton.Text = "Add";
             this.openAddPublisherButton.UseVisualStyleBackColor = true;
+            this.openAddPublisherButton.Click += new System.EventHandler(this.OpenAddPublisherButton_Click);
             // 
             // editSelectedPublisherButton
             // 
@@ -81,6 +82,7 @@
             this.editSelectedPublisherButton.TabIndex = 4;
             this.editSelectedPublisherButton.Text = "Edit";
             this.editSelectedPublisherButton.UseVisualStyleBackColor = true;
+            this.editSelectedPublisherButton.Click += new System.EventHandler(this.EditSelectedPublisherButton_Click);
             // 
             // deleteSelectedPublisherButton
             // 
@@ -92,6 +94,7 @@
             this.deleteSelectedPublisherButton.TabIndex = 3;
             this.deleteSelectedPublisherButton.Text = "Delete";
             this.deleteSelectedPublisherButton.UseVisualStyleBackColor = true;
+            this.deleteSelectedPublisherButton.Click += new System.EventHandler(this.DeleteSelectedPublisherButton_Click);
             // 
             // PublisherListForm
             // 
